@@ -11,20 +11,22 @@ import { switchMap, tap } from 'rxjs/operators';
 @Component({
     selector: 'app-movie',
     template: `
-        <h1>Routed Movie Component</h1>
+      <h1>Routed Movie Component</h1>
 
+      <div>
         <button (click)="previousMovie()">Previous</button>
 
-        <div *ngIf="currentMovie | async as movie; else noMovie" >
+        <span *ngIf="currentMovie | async as movie; else noMovie" >
             ({{movie.id}}) {{movie.title }}
-        </div>
+        </span>
 
         <ng-template #noMovie>
-            <div><i>No Movie</i></div>
+            <span><i>No Movie</i></span>
         </ng-template>
 
         <button (click)="nextMovie()">Next</button>
         <button routerLink="/" class="home">Home</button>
+      </div>
     `,
     providers: [ FilmService ],
     styleUrls: ['./movie.component.css']
