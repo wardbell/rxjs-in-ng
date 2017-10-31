@@ -1,0 +1,29 @@
+<label>
+    Find:
+    <input type="text" #inp [formControl]="search">
+</label>
+
+<span *ngIf="sw.loading$|async">
+    <img src="/assets/spinner.svg" alt="spinner" style="width:2em;height:1em;"> Loading..
+</span>
+<div class="card" *ngIf='found$|async; let found'>
+    <div>There are {{found.length}} results in the set</div>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>name</th>
+                <th>gender</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let people of found">
+                <td>
+                    <img [src]="gip.find(people.name)|async" style="max-width:5em">
+                </td>
+                <td>{{people.name}}</td>
+                <td>{{people.gender}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

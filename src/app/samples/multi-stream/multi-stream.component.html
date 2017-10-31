@@ -1,0 +1,32 @@
+<div class="card" *ngIf="films$|async;let films">
+    <div>There are {{films.length}} results in the set</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let film of films">
+                <td>{{film.title}}</td>
+                <td>{{film.release_date|date:"y"}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <p>Add Movie</p>
+        <div>
+            <label>Name
+                <input type="text" #name>
+            </label>
+        </div>
+        <div>
+            <label>Year
+                <input type="number" #year min='1970' max='2020'>
+            </label>
+        </div>
+        <button (click)="add({title:name.value,release_date:year.value})">Add</button>
+        <button (click)="clear()">Clear local storage</button>
+    </div>
+</div>

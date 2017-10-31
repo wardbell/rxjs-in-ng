@@ -1,0 +1,9 @@
+<div>
+    <!-- Bind input box to the component class's searchTerm FormControl -->
+    <input type="text" [formControl]="searchTerm" />
+    <ul>
+        <li *ngFor="let art of keyWords$ | async" [title]='art.desc'>
+            <a [href]="art.url" target="blank">{{art.title}}</a>
+        </li>
+    </ul>
+</div>

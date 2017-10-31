@@ -1,0 +1,95 @@
+<div class=main>
+    <button-bar-item *menuText="'Simple Films 1'">
+        <app-simplefilms></app-simplefilms>
+    </button-bar-item>
+
+    <button-bar-item *menuText="'Simple Films 2'">
+        <app-simplefilms2></app-simplefilms2>
+    </button-bar-item>
+
+    <button-bar-item *menuText="'Simple Films 3'">
+        <app-simplefilms3></app-simplefilms3>
+    </button-bar-item>
+
+    <button-bar-item *menuText="'WikiPedia'">
+        <p>Search wikipedia with autocomplete</p>
+        <app-wikipedia></app-wikipedia>
+    </button-bar-item>
+
+    <button-bar-item *menuText="'Memory Leak'">
+        <p>Memory leak when fail to unsubscribe</p>
+        <p>Open console and click sample's button to close component. The timer keeps ticking even though component is gone.</p>
+        <app-leaky-component></app-leaky-component>
+    </button-bar-item>
+
+    <button-bar-item *menuText="'AsyncPipe'">
+        <p>AsyncPipe automatically unsubscribes</p>
+        <p>Open console and click sample's button to close component and see it stop.</p>
+        <app-async></app-async>
+    </button-bar-item>
+
+    <button-bar-item *menuText="'TakeUntil'">
+        <p>Use takeUntil to unsubscribe</p>
+        <p>Open console and click sample's button to close component and see it stop.</p>
+        <app-take-until></app-take-until>
+    </button-bar-item>
+
+    <button-bar-item *menuText="'Multi-stream'">
+        <p>Combine three film streams into one</p>
+        <app-multi-stream></app-multi-stream>
+    </button-bar-item>
+
+    <button-bar-item *menuText="'people'">
+        <p>People Paging</p>
+        <app-sw-people></app-sw-people>
+    </button-bar-item>
+
+    <button-bar-item *menuText="'People Find'">
+        <p>People Finding</p>
+        <p>Filtering results and lazy loading images</p>
+        <app-sw-people-find></app-sw-people-find>
+    </button-bar-item>
+
+    <button-bar-item *menuText="'WhipWhee'">
+        <p>Kit says "WhipWhee"</p>
+        <whip-wheehw></whip-wheehw>
+    </button-bar-item>
+
+    <button-bar-item *menuText="'rijks'">
+        <p>Search the Rijksmuseum API</p>
+        <app-artists></app-artists>
+    </button-bar-item>
+
+    <!--
+<button-bar-item *menuText="'takeWhile*'">
+    <p>Subscribe with takeWhile</p>
+    <app-take-while></app-take-while>
+</button-bar-item>
+
+<button-bar-item *menuText="'takeWhile2*'">
+    <p>Subscibe with takeWhile monkey patch component</p>
+    <app-comp-alive></app-comp-alive>
+</button-bar-item>
+
+<button-bar-item *menuText="'Decorator*'">
+    <p>Emitter with custom decorator, again monkeypatch component</p>
+    <app-comp-is-there></app-comp-is-there>
+</button-bar-item>
+
+<button-bar-item *menuText="'TakeUntil(mp)*'">
+    <p>Subscibe with takeUntil monkey patch component</p>
+    <app-comp-alive-obs></app-comp-alive-obs>
+</button-bar-item>
+
+<button-bar-item *menuText="'rxOperator*'">
+    <p>A custom RxJS operator to terminate subscription</p>
+    <app-rx-operator></app-rx-operator>
+</button-bar-item>
+-->
+    <button-bar-item *ngFor="let artDetail of raki.detail$|async">
+        <p (click)='raki.loadDetail(undefined)' style="cursor:pointer;">
+            <img src="/assets/close.png" style="height:1.2em"> Art info</p>
+        <app-art-detail [artDetail]="artDetail"></app-art-detail>
+    </button-bar-item>
+
+</div>

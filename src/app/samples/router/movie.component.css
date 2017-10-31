@@ -1,0 +1,19 @@
+button {
+    color: white;
+    background-color:blue;
+    max-width: 10em;
+    margin: 10px;
+}
+
+button.home {
+    background-color: green;
+}
+
+:host {
+    display:grid;
+    min-height:50vh;
+    margin:20px;
+    background-color: rgba(207, 235, 248, 0.85);
+    border-radius: 15px;
+    padding:10px;
+}

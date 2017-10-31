@@ -1,0 +1,13 @@
+div.MainHolder {
+  background-size: contain;
+  transition: background-image 1s ease-in-out;
+}
+
+.main
+  > button-bar-item:nth-child(2)
+  > div:nth-child(1)
+  > p:nth-child(1)
+  > img:nth-child(1) {
+  height: 1em;
+  width: auto;
+}
