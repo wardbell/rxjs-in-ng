@@ -49,7 +49,7 @@ export class Simplefilms3Component implements OnInit {
     this.films$ = this.filmsService.getFilms().pipe(
       catchError(err => {
         this.errorMsg = err.message;
-        return [];
+        return []; // return empty list for display
       })
     );
   }
@@ -58,6 +58,10 @@ export class Simplefilms3Component implements OnInit {
     const movie = { title: 'A New Observer!' } as Movie;
 
     // Don't forget to subscribe
-    this.filmsService.add(movie).subscribe();
+    this.filmsService.add(movie).subscribe(
+      null, // do nothing when succeeds
+      err => {
+        this.errorMsg = err.message;
+      });
   }
 }

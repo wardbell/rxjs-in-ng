@@ -35,7 +35,14 @@ export class SimpleFilmsService3 {
   }
 
   add(movie: Movie) {
-    return this.http.post(this.url, movie);
+    return this.http.post(this.url, movie).pipe(
+      catchError(err => {
+        // log HTTP error and ...
+        console.error('GET failed', err);
+        // rethrow as a user-friendly message
+        throw new Error('Sorry but can\'t add movies right now; please try again later')
+      })
+    );
   }
 
   private get url() {
