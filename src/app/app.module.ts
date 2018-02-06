@@ -30,7 +30,6 @@ import { SwPeopleFindComponent } from './samples/sw-people-find/sw-people-find.c
 import { GiphyService } from 'app/samples/giphy.service';
 import { WikipediaService } from './samples/wikipedia.service';
 import { WikipediaComponent } from './samples/wikipedia/wikipedia.component';
-import { WikipediaOldComponent } from './samples/wikipedia/wikipedia-old.component';
 import { ArtistsComponent } from './rijks/artists/artists.component';
 import { RakiService } from 'app/rijks/raki.service';
 import { ArtDetailComponent } from './rijks/art-detail/art-detail.component';
@@ -42,6 +41,8 @@ import { Simplefilms3Component } from './samples/simplefilms3/simplefilms3.compo
 import { SwUrlService } from 'app/samples/sw-url.service';
 import { MovieComponent } from 'app/samples/router/movie.component';
 import { SamplesComponent } from 'app/samples.component';
+
+import { FilmPeopleComponent } from 'app/samples/film-people/film-people.component';
 
 const routes: Routes = [
     { path: '',      component: SamplesComponent },
@@ -59,6 +60,7 @@ const routes: Routes = [
         CompIsThereComponent,
         CompAliveComponent,
         CompAliveObsComponent,
+        FilmPeopleComponent,
         LeakyComponent,
         RxOperatorComponent,
         TakeUntilComponent,
@@ -69,7 +71,7 @@ const routes: Routes = [
         MultiStreamComponent,
         SwPeopleComponent,
         SwPeopleFindComponent,
-        WikipediaComponent, WikipediaOldComponent,
+        WikipediaComponent,
         ArtistsComponent,
         ArtDetailComponent,
         SimplefilmsComponent,
@@ -87,13 +89,13 @@ const routes: Routes = [
         RouterModule.forRoot(routes)
     ],
     providers: [
-        TimeService,
-        ButtonbarService,
-        SwPeopleService,
-        SwUrlService,
-        GiphyService,
-        WikipediaService,
-        RakiService,
+      ButtonbarService,
+      GiphyService,
+      RakiService,
+      SwPeopleService,
+      SwUrlService,
+      TimeService,
+      WikipediaService,
     ],
     bootstrap: [AppComponent]
 })

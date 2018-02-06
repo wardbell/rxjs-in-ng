@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { WikipediaService } from 'app/samples/wikipedia.service';
 import { FormControl } from '@angular/forms';
 
-// Add operators to Observable
 import {debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
 
 @Component({
@@ -18,7 +17,7 @@ export class WikipediaComponent {
   searchTerm = new FormControl();
 
   // Listen for search box value changes
-  keyWords$ = this.searchTerm.valueChanges.pipe(
+  articles$ = this.searchTerm.valueChanges.pipe(
     debounceTime(1000),
     distinctUntilChanged(),
     switchMap(searchTerm => this.wikiService.load(searchTerm)),

@@ -1,0 +1,10 @@
+<div>
+  <!-- Bind input box to the component class's searchTerm FormControl -->
+  <input type="text" [formControl]="searchTerm" />
+  <h2>Films</h2>
+  <ul>
+      <li *ngFor="let film of films$ | async" [title]='film.title'>
+        {{film.title}}
+      </li>
+  </ul>
+</div>

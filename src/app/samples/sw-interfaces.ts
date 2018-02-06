@@ -33,6 +33,7 @@ export interface People {
     created?: Date;
     edited?: Date;
     url?: string;
+    id?: number;
 }
 
 export interface RootObject<T> {
