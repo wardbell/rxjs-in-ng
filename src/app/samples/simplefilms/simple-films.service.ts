@@ -1,4 +1,3 @@
-// tslint:disable:member-ordering
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RootMovies, Movie } from '../sw-interfaces';
@@ -7,13 +6,13 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class SimpleFilmsService {
-    constructor(private http: HttpClient, private swUrlService: SwUrlService) {}
+  constructor(private http: HttpClient, private swUrlService: SwUrlService) {}
 
-    getFilms(): Observable<RootMovies> {
-        return this.http.get<RootMovies>(this.url);
-    }
+  getFilms(): Observable<RootMovies> {
+    return this.http.get<RootMovies>(this.url);
+  }
 
-    get url() {
-        return this.swUrlService.url;
-    }
+  get url() {
+    return this.swUrlService.url;
+  }
 }

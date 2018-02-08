@@ -9,9 +9,9 @@ import 'rxjs/add/operator/catch'; // now `catchError`
 import { SimpleFilmsService3 } from './simple-films3.service';
 
 // @Component({
-//     selector: 'app-simplefilms3',
-//     templateUrl: './simplefilms3.component.html',
-//     providers: [ SimpleFilmsService3 ]
+//   selector: 'app-simplefilms3',
+//   templateUrl: './simplefilms3.component.html',
+//   providers: [ SimpleFilmsService3 ]
 // })
 export class Simplefilms3Component implements OnInit {
   errorMsg: string;

@@ -19,36 +19,36 @@ import { SimpleFilmsService2 } from './simple-films2.service';
   providers: [ SimpleFilmsService2 ]
 })
 export class Simplefilms2Component implements OnInit {
-    errorMsg: string;
+  errorMsg: string;
 
-    films: Movie[];
+  films: Movie[];
 
-    constructor(private filmsService: SimpleFilmsService2) {}
+  constructor(private filmsService: SimpleFilmsService2) {}
 
-    ngOnInit() {
-        this.refresh();
-    }
+  ngOnInit() {
+    this.refresh();
+  }
 
-    refresh() {
-        this.errorMsg = '';
+  refresh() {
+    this.errorMsg = '';
 
-        this.filmsService.getFilms().subscribe(
+    this.filmsService.getFilms().subscribe(
 
-            // Why digging in for the results? Yuck!
-            data => (this.films = data.results),
+      // Why digging in for the results? Yuck!
+      data => (this.films = data.results),
 
-            // Report errors in this 2nd subscribe parameter
-            err => {
-                console.error(err);
-                this.errorMsg = err.message;
-            }
-        );
-    }
+      // Report errors in this 2nd subscribe parameter
+      err => {
+        console.error(err);
+        this.errorMsg = err.message;
+      }
+    );
+  }
 
-    add() {
-        const movie = { title: 'A New Observer!' } as Movie;
+  add() {
+    const movie = { title: 'A New Observer!' } as Movie;
 
-        // Don't forget to subscribe!
-        this.filmsService.add(movie); // .subscribe();
-    }
+    // Don't forget to subscribe!
+    this.filmsService.add(movie); // .subscribe();
+  }
 }
