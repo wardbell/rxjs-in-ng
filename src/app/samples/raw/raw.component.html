@@ -1,0 +1,22 @@
+<h3>Raw Observables Demo</h3>
+
+<p *ngIf="errorMessage" class="error-message">{{errorMessage}}</p>
+
+<div>
+  <button (click)="binding()">Binding</button>
+  <button (click)="v1()">Observable v1</button>
+  <button (click)="v2()">Observable v2</button>
+  <button (click)="v3()">Observable v3</button>
+  <button (click)="clear()">Clear</button>
+</div>
+
+<h4>{{currentDemo}}</h4>
+
+<input (keyup)="onKey($event.target.value)"
+
+        class="play" [class.hidden]="isHidden"
+        placeholder="Type something" #input />
+
+<ol>
+  <li *ngFor="let item of items">{{item}}</li>
+</ol>

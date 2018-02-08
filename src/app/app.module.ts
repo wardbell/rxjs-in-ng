@@ -15,6 +15,7 @@ import { CompAliveComponent } from 'app/samples/comp-alive/comp-alive.component'
 import { CompIsThereComponent } from './samples/comp-is-there/comp-is-there.component';
 import { CompAliveObsComponent } from './samples/comp-alive-obs/comp-alive-obs.component';
 import { RxOperatorComponent } from './samples/rx-operator/rx-operator.component';
+import { RawComponent } from './samples/raw/raw.component';
 import { TakeUntilComponent } from './samples/take-until/take-until.component';
 import { WhipwheehwComponent } from './samples/whipWheehw/whipwheehw.component';
 import { AsyncComponent } from 'app/samples/async/async.component';
@@ -62,6 +63,7 @@ const routes: Routes = [
         CompAliveObsComponent,
         FilmPeopleComponent,
         LeakyComponent,
+        RawComponent,
         RxOperatorComponent,
         TakeUntilComponent,
         TakeWhileComponent,

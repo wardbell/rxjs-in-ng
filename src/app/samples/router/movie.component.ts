@@ -25,7 +25,6 @@ import { switchMap, tap } from 'rxjs/operators';
         </ng-template>
 
         <button (click)="nextMovie()">Next</button>
-        <button routerLink="/" class="home">Home</button>
       </div>
     `,
     providers: [ FilmService ],
