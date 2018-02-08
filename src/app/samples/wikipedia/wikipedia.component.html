@@ -1,9 +1,12 @@
 <div>
+    <div *ngIf="errorMsg" class="error">{{errorMsg}}</div>
+
     <!-- Bind input box to the component class's searchTerm FormControl -->
     <input type="text" [formControl]="searchTerm" />
     <ul>
         <li *ngFor="let article of articles$ | async" [title]='article.desc'>
-            <a [href]="article.url" target="blank">{{article.title}}</a>
+          <span *ngIf="!article.url">{{article.title}}</span>
+          <a *ngIf="article.url" [href]="article.url" target="blank">{{article.title}}</a>
         </li>
     </ul>
 </div>

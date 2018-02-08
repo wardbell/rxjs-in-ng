@@ -91,6 +91,7 @@ td > img {
 .error {
     background-color: red;
     color: white;
+    margin-bottom: 8px;
     padding: 8px;
 }
 
