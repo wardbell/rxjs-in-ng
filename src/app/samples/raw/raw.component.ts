@@ -12,6 +12,7 @@ import { Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/co
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { Subscription } from 'rxjs/Subscription';
+import { timer } from 'rxjs/observable/timer';
 
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { filter } from 'rxjs/operators';
@@ -31,18 +32,17 @@ export class RawComponent implements OnInit, OnDestroy {
     this.reset();
 
     /////// Observable
-    const observable = new Observable(
 
-      // A function that takes an Observer/Subscriber
-      (observer: Observer<string>) => {
+    // A function that takes an Observer (AKA, Subscriber)
+    const myObservable = (subscriber: Observer<string>) => {
+      // Call observer methods when something happens
+      subscriber.next('Hello, good looking!');
+    }
 
-        // Call observer/subscriber methods when something happens
-        observer.next('Hello, good looking!');
-      }
-    );
 
-    ////// Subscriber ////////
-    const subscriber: Observer<string> = {
+    ////// Observer/Subscriber ////////
+    // An object with zero-to-three of these methods
+    const mySubscriber: Observer<string> = {
 
       next: value => this.items.push(value),
 
@@ -52,9 +52,12 @@ export class RawComponent implements OnInit, OnDestroy {
 
     };
 
-    ////// Subscribe to execute
+    // Wrap as RxJS Observable for safety and features
+    const observable = new Observable(myObservable);
+
+    // Subscribe to execute
     // Nothing happens until we subscribe!
-    this.subscription = observable.subscribe(subscriber);
+    this.subscription = observable.subscribe(mySubscriber);
 
 
     ////// Alternative: Subscribe with callbacks
@@ -113,6 +116,43 @@ export class RawComponent implements OnInit, OnDestroy {
     this.isHidden = false;
 
     /////// Observable
+
+    // Custom observable listens for input box keystrokes
+    const keyupObservable = (subscriber: Observer<KeyboardEvent>) => {
+
+      this.inputEl.addEventListener('keyup', listener);
+
+      // return function to remove listener when unsubscribed
+      return () => {
+         this.inputEl.removeEventListener('keyup', listener);
+      };
+
+      function listener(evt: KeyboardEvent) {
+        subscriber.next(evt);
+      }
+    };
+
+    // wrap as RxJS Observable for safety and features
+    const observable = new Observable(keyupObservable);
+
+    this.subscription = observable.subscribe(
+      value => this.items.push(this.inputEl.value),
+      (err: string) => this.errorMessage = err,
+      () => this.items.push('observable completed')
+    );
+
+  }
+
+
+//////// v 4 ///////////
+
+  v4() {
+    this.currentDemo = 'Observable v4';
+    this.reset();
+    this.isHidden = false;
+
+    /////// Observable
+    // fromEvent: Observable creator replaces custom v3 observable
     const observable = fromEvent(this.inputEl, 'keyup')
 
     // .pipe(
@@ -179,3 +219,8 @@ export class RawComponent implements OnInit, OnDestroy {
 
   // endregion
 }
+
+// timer(2000).subscribe(() => {
+//   observer.next('TA DA!'); // delayed emit
+//   observer.complete();
+// });
