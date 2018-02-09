@@ -68,15 +68,6 @@ export class RawComponent implements OnInit, OnDestroy {
     // );
   }
 
-  //////// Unsubscribe /////
-
-  ngOnDestroy() {
-    // Ultra-safe practice to unsubscribe when component destroyed
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-
 //////// v2 ///////////
 
   v2() {
@@ -168,6 +159,15 @@ export class RawComponent implements OnInit, OnDestroy {
 
   }
 
+//////// Unsubscribe /////
+
+  ngOnDestroy() {
+    // Ultra-safe practice to unsubscribe when component destroyed
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+  
 //////// Component internals ///////////
   // region component internals
 
