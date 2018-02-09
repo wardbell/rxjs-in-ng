@@ -23,12 +23,14 @@ export class WikipediaComponent {
 
   // Listen for search box value changes
   articles$ = this.searchTerm.valueChanges.pipe(
+
     tap(() => this.errorMsg = ''), // clear previous error (if any)
     debounceTime(1000),            // wait for typing to stop
     distinctUntilChanged(),        // only if different than last time
 
     // Try search. Discard an in-flight search (if any).
-    switchMap(searchTerm => this.wikiService.load(searchTerm).pipe(
+    switchMap(searchTerm => this.wikiService.load(searchTerm)
+      .pipe(
         // Catch and recover from search error here.
         // If try to recover later, `searchTerm` observable completes
         catchError(err => {

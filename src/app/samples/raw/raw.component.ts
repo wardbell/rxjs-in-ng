@@ -167,7 +167,7 @@ export class RawComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
     }
   }
-  
+
 //////// Component internals ///////////
   // region component internals
 

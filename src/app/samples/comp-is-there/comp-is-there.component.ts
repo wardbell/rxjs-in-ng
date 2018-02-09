@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { from } from 'rxjs/observable/from';
 
 import { takeUntil } from 'rxjs/operators';
-// import 'rxjs/add/operator/takeUntil';
 
 @Component({
     selector: 'app-comp-is-there',
