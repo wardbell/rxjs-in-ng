@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 // Add each RxJS operator to Observable
 import 'rxjs/add/operator/catch'; // now `catchError`
 
-import { SimpleFilmsService3 } from './simple-films3.service';
+import { SimpleFilmsService3 } from '../simplefilms3/simple-films3.service';
 
 // @Component({
 //   selector: 'app-simplefilms3',

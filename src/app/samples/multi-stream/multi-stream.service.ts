@@ -65,7 +65,7 @@ export class MultiStreamService {
 
   add(newMovie: Movie) {
     // make sure we have a "proper" formated date
-    newMovie.release_date = new Date(newMovie.release_date).toISOString();
+    newMovie = formatReleaseDate(newMovie);
     this.saveNewMovie(newMovie);
 
     // Push the update into the film$ observable
@@ -99,4 +99,15 @@ export class MultiStreamService {
   private get url() {
     return this.swUrlService.url;
   }
+
+}
+
+
+/// helpers ///
+
+function formatReleaseDate(movie: Movie) {
+  // Have to bump the year by 1 to get property date
+  const releaseYear = ((+movie.release_date) + 1).toString();
+  movie.release_date = new Date(releaseYear).toISOString();
+  return movie;
 }
