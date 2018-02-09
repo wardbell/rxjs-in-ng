@@ -12,11 +12,12 @@ export class SimpleFilmsService2 {
     return this.http.get<RootMovies>(this.url);
   }
 
+  get url() {
+    return this.swUrlService.url;
+  }
+
   add(movie: Movie) {
     return this.http.post(this.url, movie);
   }
 
-  get url() {
-    return this.swUrlService.url;
-  }
 }

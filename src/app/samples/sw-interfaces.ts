@@ -1,3 +1,12 @@
+export type RootMovies = RootObject<Movie[]>;
+
+export interface RootObject<T> {
+    count: number;
+    next?: any;
+    previous?: any;
+    results: T ;
+}
+
 export interface Movie {
     title: string;
     episode_id?: number;
@@ -36,12 +45,4 @@ export interface People {
     id?: number;
 }
 
-export interface RootObject<T> {
-    count: number;
-    next?: any;
-    previous?: any;
-    results: T ;
-}
-
 export type RootPeople = RootObject<People[]>;
-export type RootMovies = RootObject<Movie[]>;
