@@ -18,9 +18,10 @@ export class SimplefilmsComponent implements OnInit {
   constructor(private filmsService: SimpleFilmsService) {}
 
   ngOnInit() {
-    this.filmsService.getFilms()
-      .subscribe(
-        data => (this.films = data.results)
-      );
+    const films$ = this.filmsService.getFilms();
+
+    films$.subscribe(
+      data => (this.films = data.results)
+    );
   }
 }
