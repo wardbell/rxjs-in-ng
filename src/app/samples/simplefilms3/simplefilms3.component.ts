@@ -58,7 +58,6 @@ export class Simplefilms3Component implements OnInit {
   add() {
     const movie = { title: 'A New Observer!' } as Movie;
 
-    // Don't forget to subscribe
     this.filmsService.add(movie).subscribe(
       null, // do nothing when succeeds
       err => {

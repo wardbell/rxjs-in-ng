@@ -1,27 +1,47 @@
 # Steps through the Samples
 
 ## Simple Films 1
+- Component
+  - injected service
+  - getAll returns an observable
+  - subscribe to it
 
-- `HttpClient` observable API
-- `HttpClient` & subscribe
-- Show the service
-- Show that you get no feedback on error
+- The service
+  - `HttpClient` observable API
+  - `HttpClient` & subscribe
+- No feedback on error
 
 ## Simple Films 2
-- Handle error in subscribe
-- Adds movie (see in the service)
-- Show what happens when don’t subscribe to the `addHero` observable
-- Must subscribe to execute. It’s like LINQ `toList()`.
+- Component
+  - Handle error in subscribe
+  - Adds movie (no subscribe at first)
+- Service
+  - add() - returns observable
+- Component
+  - Show what happens when don’t subscribe to the `addHero` observable
+  - Must subscribe to execute. It’s like LINQ `toList()`.
 
 ## Simple Films 3
-- Operators: `map` and `catchError` in the service
-- Critical to present a user-friendly error even as you capture full error info for developers.
-- Re-throw user-friendly error message
-- Must handle with `catchError` in the component
-- `AsyncPipe` (another Angular observable API) in the template
-- `film$` is `Observable<Movie[]>` instead of `Movie[]`
-- Catching errors and returning on the next channel this time
--`Old (<5.5) vs New (v5.5) RxJS syntax [in `old-chain-syntax` folder]
+- Component (AsyncPipe)
+  - `film$` is `Observable<Movie[]>` instead of `Movie[]`
+  - `AsyncPipe` (another Angular observable API) in the template
+  -  getting
+
+- Component (`catchError` instead of `subscribe`)
+  - Critical to present a user-friendly error even as you capture full error info for developers.
+  - `pipe()`
+  - `catchError()`
+  - import operators
+  - Catching errors and returning on the next channel this time
+
+- Service
+  - Operators: `map` and `catchError` in the service
+  - Re-throw user-friendly error message
+  - Must handle with `catchError` in the component or else...
+  - using `map` to reshape data for component
+  
+
+- `Old (<5.5) vs New (v5.5) RxJS syntax [in `old-chain-syntax` folder]
 
 ## Raw Observables
 
@@ -40,7 +60,7 @@ _Observables are just functions_.
 
 ## Wikipedia
 - Operators make chaining (piping) easy
-- Operators can convert an observable of one type (`string`) to an observable of another type (`Movie[]`)
+- Operators can convert an observable of one type (`string` keystrokes) to an observable of another type (`Movie[]`)
 - `switchMap`:  operators that take value args (map) and “higher order” operators that take Observable args.
 - `FormControl` to get changes for validation
 - _Reactive Forms_: another Angular observable API

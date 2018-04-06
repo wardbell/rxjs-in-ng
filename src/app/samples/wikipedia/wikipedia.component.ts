@@ -5,13 +5,31 @@ import { FormControl } from '@angular/forms';
 
 import { of } from 'rxjs/observable/of';
 import {
-  catchError, debounceTime, distinctUntilChanged,
-  map, switchMap, tap
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  switchMap,
+  tap
 } from 'rxjs/operators';
 
 @Component({
   selector: 'app-wikipedia',
-  templateUrl: './wikipedia.component.html'
+  template: `
+    <div>
+      <div *ngIf="errorMsg" class="error">{{errorMsg}}</div>
+
+      <!-- Bind input box to the component class's searchTerm FormControl -->
+      <input type="text" [formControl]="searchTerm" />
+
+      <ul>
+          <li *ngFor="let article of articles$ | async" [title]='article.desc'>
+            <span *ngIf="!article.url">{{article.title}}</span>
+            <a *ngIf="article.url" [href]="article.url" target="blank">{{article.title}}</a>
+          </li>
+      </ul>
+    </div>
+  `
 })
 export class WikipediaComponent {
 
