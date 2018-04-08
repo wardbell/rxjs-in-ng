@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Subject } from 'rxjs/Subject';
+import { Subject  } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { TimeService } from '../../time.service';

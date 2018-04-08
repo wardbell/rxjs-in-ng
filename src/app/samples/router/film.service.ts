@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Movie, RootObject } from './../sw-interfaces';
 import { SwUrlService } from 'app/samples/sw-url.service';
 
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable()

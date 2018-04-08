@@ -6,7 +6,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from 'app/samples/sw-interfaces';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 // Import RxJS operators
 import { catchError } from 'rxjs/operators';

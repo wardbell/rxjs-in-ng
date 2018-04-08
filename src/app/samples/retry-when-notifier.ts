@@ -1,6 +1,6 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 import { delay, switchMap, tap } from 'rxjs/operators';
 
 export type RetryWhenNotifier = (errors: Observable<any>) => Observable<any>;
