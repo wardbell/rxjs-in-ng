@@ -9,14 +9,17 @@ import { SwUrlService } from 'app/samples/sw-url.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  hasArt = true;
   @ViewChild('main') main;
   constructor(public raki: RakiService, private swUrlService: SwUrlService) {}
 
   ngOnInit() {
-    // const m = this.main.nativeElement;
-    // this.raki.randomImage$.subscribe(url => {
-    //     m.style.backgroundImage = url;
-    // });
+    if (this.hasArt) {
+      const m = this.main.nativeElement;
+      this.raki.randomImage$.subscribe(url => {
+        m.style.backgroundImage = url;
+      });
+    }
   }
 
   toggleSwUrl() {
