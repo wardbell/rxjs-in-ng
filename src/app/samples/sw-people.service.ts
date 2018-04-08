@@ -16,6 +16,7 @@ import {
   switchMap,
   tap
 } from 'rxjs/operators';
+
 import { People, RootPeople } from 'app/samples/sw-interfaces';
 
 const log = (desc: string) => (...args) => console.log(desc, ...args);

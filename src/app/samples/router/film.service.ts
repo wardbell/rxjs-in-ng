@@ -1,12 +1,12 @@
 // tslint:disable:member-ordering
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Movie, RootObject } from './../sw-interfaces';
-import { SwUrlService } from 'app/samples/sw-url.service';
+import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+
+import { Movie, RootObject } from './../sw-interfaces';
+import { SwUrlService } from 'app/samples/sw-url.service';
 
 @Injectable()
 export class FilmService {

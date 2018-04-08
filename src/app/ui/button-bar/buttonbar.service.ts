@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { Observable, Subject } from 'rxjs';
 import { map, scan, shareReplay, startWith, switchMap } from 'rxjs/operators';
 
