@@ -42,3 +42,4 @@ testem.log
 .DS_Store
 Thumbs.db
 /docs and slides/~$SlideDeck-first.pptx
+/test
