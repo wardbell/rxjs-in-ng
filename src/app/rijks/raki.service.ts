@@ -50,7 +50,7 @@ export class RakiService {
       tap(r => (this.artCount = r.count)),
       switchMap(() => timer(0, 20000)),
       switchMap(() => this.getArtObject$),
-      // please note that switchmap handles a promise also!
+      // please note that switchmMap handles a promise also!
       switchMap(artObject => this.preload(artObject.webImage.url))
     );
 
