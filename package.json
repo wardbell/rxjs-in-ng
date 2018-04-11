@@ -44,7 +44,7 @@
     "rxjs-compat": "^6.0.0-tactical-rc.1",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
-    "typescript": "2.9.0-dev.20180410",
+    "typescript": "2.7.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
