@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { RakiService } from 'app/rijks/raki.service';
 import {} from '';
-import { SwUrlService } from 'app/samples/sw-url.service';
+import { RakiService } from './rijks/raki.service';
+import { SwUrlService } from './samples/sw-url.service';
 
 @Component({
   selector: 'app-root',

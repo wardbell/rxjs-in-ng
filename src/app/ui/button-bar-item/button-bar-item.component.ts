@@ -11,7 +11,7 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { ButtonbarService } from 'app/ui/button-bar/buttonbar.service';
+import { ButtonbarService } from '../../ui/button-bar/buttonbar.service';
 
 @Component({
   // tslint:disable-next-line:component-selector

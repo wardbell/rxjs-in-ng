@@ -1,15 +1,16 @@
+// tslint:disable:member-ordering
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 /**
  *  Merging three streams
  */
-// tslint:disable:member-ordering
-import { Injectable } from '@angular/core';
-
 import { Observable, Subject } from 'rxjs';
 import { map, merge, scan, shareReplay, tap } from 'rxjs/operators';
 
-import { SwUrlService } from 'app/samples/sw-url.service';
-import { Movie, RootMovies } from 'app/samples/sw-interfaces';
+import { SwUrlService } from '../sw-url.service';
+import { RootMovies } from '../sw-interfaces';
+
+
 @Injectable()
 export class MultiStreamService {
   constructor(private http: HttpClient, private swUrlService: SwUrlService) {}

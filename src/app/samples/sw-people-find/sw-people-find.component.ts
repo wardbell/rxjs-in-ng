@@ -3,9 +3,9 @@ import { FormControl } from '@angular/forms';
 
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 
-import { GiphyService } from 'app/samples/giphy.service';
-import { People } from 'app/samples/sw-interfaces';
-import { SwPeopleService } from 'app/samples/sw-people.service';
+import { GiphyService } from '../../samples/giphy.service';
+import { People } from '../../samples/sw-interfaces';
+import { SwPeopleService } from '../../samples/sw-people.service';
 
 @Component({
     selector: 'app-sw-people-find',

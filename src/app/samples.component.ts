@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RakiService } from 'app/rijks/raki.service';
+import { RakiService } from './rijks/raki.service';
 
 @Component({
   templateUrl: './samples.component.html',

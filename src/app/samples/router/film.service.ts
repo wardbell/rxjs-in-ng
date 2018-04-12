@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { Movie, RootObject } from './../sw-interfaces';
-import { SwUrlService } from 'app/samples/sw-url.service';
+import { SwUrlService } from '../../samples/sw-url.service';
 
 @Injectable()
 export class FilmService {

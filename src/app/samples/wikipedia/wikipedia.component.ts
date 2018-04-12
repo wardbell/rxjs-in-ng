@@ -1,6 +1,6 @@
 // tslint:disable:member-ordering
 import { Component } from '@angular/core';
-import { WikipediaService, WikiResult } from 'app/samples/wikipedia.service';
+import { WikipediaService, WikiResult } from '../../samples/wikipedia.service';
 import { FormControl } from '@angular/forms';
 
 import { of } from 'rxjs';

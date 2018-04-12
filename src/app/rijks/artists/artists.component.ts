@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RakiService } from 'app/rijks/raki.service';
 import { FormControl } from '@angular/forms';
 
 import { debounceTime, distinctUntilChanged, switchMap, take } from 'rxjs/operators';
+import { RakiService } from '../raki.service';
 
 @Component({
   selector: 'app-artists',

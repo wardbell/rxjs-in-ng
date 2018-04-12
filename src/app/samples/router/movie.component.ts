@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
-import { Movie } from 'app/samples/sw-interfaces';
+import { Movie } from '../../samples/sw-interfaces';
 import { FilmService } from './film.service';
 
 @Component({

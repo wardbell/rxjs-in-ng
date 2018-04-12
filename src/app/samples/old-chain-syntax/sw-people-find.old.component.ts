@@ -7,9 +7,9 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/do'; // now `tap`
 import 'rxjs/add/operator/switchMap';
 
-import { GiphyService } from 'app/samples/giphy.service';
-import { People } from 'app/samples/sw-interfaces';
-import { SwPeopleService } from 'app/samples/sw-people.service';
+import { GiphyService } from '../../samples/giphy.service';
+import { People } from '../../samples/sw-interfaces';
+import { SwPeopleService } from '../../samples/sw-people.service';
 
 // @Component({
 //     selector: 'app-sw-people-find',

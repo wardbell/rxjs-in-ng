@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from 'app/samples/sw-interfaces';
+import { Movie } from '../../samples/sw-interfaces';
 import { SimpleFilmsService } from './simple-films.service';
 
 @Component({

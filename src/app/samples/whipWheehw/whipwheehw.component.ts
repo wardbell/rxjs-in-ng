@@ -20,7 +20,7 @@ import {
   tap
 } from 'rxjs/operators';
 
-import { TimeService } from 'app/time.service';
+import { TimeService } from '../../time.service';
 
 let counter = 0;
 const log = (context: string) => (...args) =>

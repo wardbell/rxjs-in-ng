@@ -1,12 +1,12 @@
 // tslint:disable:member-ordering
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-
 import { RootMovies, RootPeople } from '../sw-interfaces';
-import { SwUrlService } from 'app/samples/sw-url.service';
+import { SwUrlService } from '../sw-url.service';
+
+
 
 @Injectable()
 export class FilmPeopleService {
@@ -22,7 +22,7 @@ export class FilmPeopleService {
         console.error('GET movies failed', err);
         // rethrow as a user-friendly message
         throw new Error(
-          "Sorry but can't get movies right now; please try again later"
+          `Sorry but can\'t get movies right now; please try again later`
         );
       })
     );
@@ -42,7 +42,7 @@ export class FilmPeopleService {
         console.error('GET movies failed', err);
         // rethrow as a user-friendly message
         throw new Error(
-          "Sorry but can't get movies right now; please try again later"
+          'Sorry but can\'t get movies right now; please try again later'
         );
       })
     );

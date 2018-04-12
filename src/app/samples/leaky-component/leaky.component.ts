@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TimeService } from 'app/time.service';
+import { TimeService } from '../../time.service';
 
 @Component({
     selector: 'app-leaky-component',
