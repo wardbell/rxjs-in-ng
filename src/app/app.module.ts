@@ -20,8 +20,8 @@ import { TakeUntilComponent } from './samples/take-until/take-until.component';
 import { WhipwheehwComponent } from './samples/whipWheehw/whipwheehw.component';
 import { AsyncComponent } from 'app/samples/async/async.component';
 import {
-    ButtonBarItemComponent,
-    ButtonBarItemDirective
+  ButtonBarItemComponent,
+  ButtonBarItemDirective
 } from './ui/button-bar-item/button-bar-item.component';
 import { LeakyComponent } from './samples/leaky-component/leaky.component';
 import { MultiStreamComponent } from './samples/multi-stream/multi-stream.component';
@@ -44,61 +44,63 @@ import { MovieComponent } from 'app/samples/router/movie.component';
 import { SamplesComponent } from 'app/samples.component';
 
 import { FilmPeopleComponent } from 'app/samples/film-people/film-people.component';
+import { OnoffbuttonModule } from 'onoffbutton';
 
 const routes: Routes = [
-    { path: '',      component: SamplesComponent },
-    { path: 'movie', component: MovieComponent },
-    { path: 'movie/:id', component: MovieComponent }
+  { path: '', component: SamplesComponent },
+  { path: 'movie', component: MovieComponent },
+  { path: 'movie/:id', component: MovieComponent }
 ];
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        AsyncComponent,
-        ButtonBar,
-        ButtonBarItemComponent,
-        ButtonBarItemDirective,
-        CompIsThereComponent,
-        CompAliveComponent,
-        CompAliveObsComponent,
-        FilmPeopleComponent,
-        LeakyComponent,
-        RawComponent,
-        RxOperatorComponent,
-        TakeUntilComponent,
-        TakeWhileComponent,
-        WhipwheehwComponent,
-        MovieComponent,
-        SamplesComponent,
-        MultiStreamComponent,
-        SwPeopleComponent,
-        SwPeopleFindComponent,
-        WikipediaComponent,
-        ArtistsComponent,
-        ArtDetailComponent,
-        SimplefilmsComponent,
-        Simplefilms2Component,
-        Simplefilms3Component
-    ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        HttpClientJsonpModule,
-        HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-            passThruUnknownUrl: true
-        }),
-        RouterModule.forRoot(routes)
-    ],
-    providers: [
-      ButtonbarService,
-      GiphyService,
-      RakiService,
-      SwPeopleService,
-      SwUrlService,
-      TimeService,
-      WikipediaService,
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    AsyncComponent,
+    ButtonBar,
+    ButtonBarItemComponent,
+    ButtonBarItemDirective,
+    CompIsThereComponent,
+    CompAliveComponent,
+    CompAliveObsComponent,
+    FilmPeopleComponent,
+    LeakyComponent,
+    RawComponent,
+    RxOperatorComponent,
+    TakeUntilComponent,
+    TakeWhileComponent,
+    WhipwheehwComponent,
+    MovieComponent,
+    SamplesComponent,
+    MultiStreamComponent,
+    SwPeopleComponent,
+    SwPeopleFindComponent,
+    WikipediaComponent,
+    ArtistsComponent,
+    ArtDetailComponent,
+    SimplefilmsComponent,
+    Simplefilms2Component,
+    Simplefilms3Component,
+    OnoffbuttonModule
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    HttpClientJsonpModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      passThruUnknownUrl: true
+    }),
+    RouterModule.forRoot(routes)
+  ],
+  providers: [
+    ButtonbarService,
+    GiphyService,
+    RakiService,
+    SwPeopleService,
+    SwUrlService,
+    TimeService,
+    WikipediaService
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
