@@ -1,3 +1,4 @@
+// tslint:disable:member-ordering
 import {
   Component,
   OnInit,
@@ -13,6 +14,7 @@ import {
 } from '@angular/forms';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'on-off-button',
   template: `
 	<input type="checkbox" [formControl]="toggleState">
@@ -93,8 +95,9 @@ export class OnOffButtonComponent
 
   update(newVal = this.toggleState.value) {
     this.onChange(newVal ? this._val : undefined);
-    if (this.button)
+    if (this.button) {
       this.button.style.backgroundColor = newVal ? 'blue' : 'gray';
+    }
   }
 
   ngAfterViewInit() {

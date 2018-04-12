@@ -8,7 +8,7 @@ import { Observable, Subject } from 'rxjs';
 import { map, merge, scan, shareReplay, tap } from 'rxjs/operators';
 
 import { SwUrlService } from '../sw-url.service';
-import { RootMovies } from '../sw-interfaces';
+import { RootMovies, Movie } from '../sw-interfaces';
 
 
 @Injectable()
