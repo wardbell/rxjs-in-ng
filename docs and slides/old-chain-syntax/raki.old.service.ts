@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { CollectionObject, ArtObject, RakiObject } from '../../rijks/rakiCollection';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import 'rxjs/add/observable/timer';
@@ -12,6 +11,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { RakiObject, CollectionObject, ArtObject } from 'src/app/rijks/rakiCollection';
 
 const key = '4a3Fxmua';
 const serialize = o => Object.keys(o).reduce((search, key) => (search += `${key}=${encodeURIComponent(o[key])}&`), '');

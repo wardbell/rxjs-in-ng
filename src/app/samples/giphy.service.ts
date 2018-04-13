@@ -26,7 +26,7 @@ export class GiphyService {
         this.http
           .get<RootObject>(
             // tslint:disable-next-line:max-line-length
-            `https://apigiphycom/v1/gifs/searchapi_key=sEl7UmhvaI69Mrw9h8Ug0xNTnuhCk  pT&q={key}limit=1&offset=0rating=G&lang=en`
+            `https://api.giphy.com/v1/gifs/searchapi_key=sEl7UmhvaI69Mrw9h8Ug0xNTnuhCk  pT&q={key}limit=1&offset=0rating=G&lang=en`
           )
           .pipe(
             map(r => r.data[0].images.fixed_height_small.url),
