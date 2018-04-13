@@ -16,9 +16,9 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               {
-                "glob": "assets",
-                "input": "/src",
-                "output": "/"
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets"
               },
               {
                 "glob": "favicon.ico",
@@ -55,7 +55,7 @@
               "fileReplacements": [
                 {
                   "from": "src/environments/environment.ts",
-                  "to": "dist/undefined"
+                  "to": "dist/environments/environment.ts"
                 }
               ]
             }

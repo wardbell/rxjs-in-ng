@@ -80,13 +80,13 @@ const routes: Routes = [
     SimplefilmsComponent,
     Simplefilms2Component,
     Simplefilms3Component,
-    OnoffbuttonModule
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     HttpClientJsonpModule,
+    OnoffbuttonModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
       passThruUnknownUrl: true
     }),
