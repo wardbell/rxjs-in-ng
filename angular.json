@@ -2,14 +2,14 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "unsubscriber": {
+    "demo": {
       "root": "",
       "projectType": "application",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/unsubscriber",
+            "outputPath": "dist/demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -37,8 +37,8 @@
             "dev": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "witch": "dist/environments/environment.ts"
+                  "with": "src/environments/environment.ts",
+                  "replace": "dist/environments/environment.ts"
                 }
               ]
             },
@@ -54,8 +54,8 @@
               "buildOptimizer": true,
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "dist/unsubscriber"
+                  "with": "src/environments/environment.ts",
+                  "replace": "dist/demo/environment.ts"
                 }
               ]
             }
@@ -64,21 +64,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "unsubscriber:build"
+            "browserTarget": "demo:build"
           },
           "configurations": {
             "dev": {
-              "browserTarget": "unsubscriber:build:dev"
+              "browserTarget": "demo:build:dev"
             },
             "production": {
-              "browserTarget": "unsubscriber:build:production"
+              "browserTarget": "demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "unsubscriber:build"
+            "browserTarget": "demo:build"
           }
         },
         "test": {
@@ -120,7 +120,7 @@
         }
       }
     },
-    "unsubscriber-e2e": {
+    "demo-e2e": {
       "root": "",
       "projectType": "application",
       "cli": {},
@@ -130,7 +130,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "unsubscriber:serve"
+            "devServerTarget": "demo:serve"
           }
         },
         "lint": {

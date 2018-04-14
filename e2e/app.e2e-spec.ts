@@ -1,10 +1,10 @@
-import { UnsubscriberPage } from './app.po';
+import { demoPage } from './app.po';
 
-describe('unsubscriber App', () => {
-  let page: UnsubscriberPage;
+describe('demo App', () => {
+  let page: demoPage;
 
   beforeEach(() => {
-    page = new UnsubscriberPage();
+    page = new demoPage();
   });
 
   it('should display welcome message', done => {

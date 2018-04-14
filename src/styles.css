@@ -41,7 +41,7 @@ body {
   margin-top: 3px;
   width: 96%;
   height: 98vh;
-  background-color: var(--body-background);
+  /* background-color: var(--body-background); */
   display: grid;
   grid-template-rows: 2rem 2.5rem 1fr;
   grid-auto-columns: 1fr;
@@ -139,6 +139,8 @@ html {
 
 body {
   background-color: var(--body-background);
+  background-Image: 'url(/assets/mainbg.jpg)';
+  background-repeat: repeat;
   margin: 0;
   padding: 0;
 }
