@@ -12,7 +12,7 @@ import { map, tap } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
   hasArt = false;
-  numberOfBackgrounds = 14
+  numberOfBackgrounds = 16;
   @ViewChild('main') main;
   constructor(public raki: RakiService, private swUrlService: SwUrlService) {}
 
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
         m.style.backgroundImage = url;
       });
     } else {
-      timer(1000, 2000)
+      timer(1000, 10000)
       .pipe(
         map(n => (+n % this.numberOfBackgrounds) + 1),
         map(n => `url(/assets/mainbg${n}.jpg)`),

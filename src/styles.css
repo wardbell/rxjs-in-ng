@@ -143,6 +143,8 @@ body {
   background-repeat: repeat;
   margin: 0;
   padding: 0;
+  transition: background-image 1s ease-in-out;
+
 }
 
 input {
