@@ -19,6 +19,9 @@
     "paths": {
       "onoffbutton": [
         "dist/onoffbutton"
+      ],
+      "se-neon": [
+        "dist/se-neon"
       ]
     }
   },

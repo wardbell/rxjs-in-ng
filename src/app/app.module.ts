@@ -45,6 +45,7 @@ import { SamplesComponent } from './samples.component';
 
 import { FilmPeopleComponent } from './samples/film-people/film-people.component';
 import { OnoffbuttonModule } from 'onoffbutton';
+import { SeNeonModule } from 'se-neon';
 
 const routes: Routes = [
   { path: '', component: SamplesComponent },
@@ -90,7 +91,8 @@ const routes: Routes = [
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
       passThruUnknownUrl: true
     }),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    SeNeonModule
   ],
   providers: [
     ButtonbarService,
