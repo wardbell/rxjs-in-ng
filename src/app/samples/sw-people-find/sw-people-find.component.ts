@@ -5,7 +5,7 @@ import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operato
 
 import { GiphyService } from '../../samples/giphy.service';
 import { People } from '../../samples/sw-interfaces';
-import { SwPeopleService } from '../../samples/sw-people.service';
+import { SwPeopleService } from '../../samples/sw-people.service-expand';
 
 @Component({
     selector: 'app-sw-people-find',

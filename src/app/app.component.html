@@ -1,5 +1,7 @@
-<se-neon>RX in Angular</se-neon>
-<se-neon>Hello ngConf</se-neon>
+<ng-container *ngIf="key$|async as key">
+  <se-neon *ngIf="key === 'F4'">RX in Angular</se-neon>
+  <se-neon *ngIf="key === 'F2'">Hello ngConf</se-neon>
+</ng-container>
 
 <div class="container">
   <h1 class="header">Observable samples</h1>

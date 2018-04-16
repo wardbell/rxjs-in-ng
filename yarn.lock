@@ -6115,7 +6115,7 @@ rxjs@^6.0.0-beta.3, rxjs@^6.0.0-turbo-rc.4:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@^6.0.0-tactical-rc.1:
+rxjs@^6.0.0-uncanny-rc.7:
   version "6.0.0-uncanny-rc.7"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.0.0-uncanny-rc.7.tgz#e5d6ebe2c538c583bf4b3600b60112d64a7a6991"
   dependencies:
