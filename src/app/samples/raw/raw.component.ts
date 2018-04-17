@@ -1,21 +1,16 @@
 // region imports
-import { Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
-
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 // Convenient ... but don't do it.
 // import { Observable } from 'rxjs';
-
 // Kitchen sink ... don't do it this way either.
 // import * as rxjs from 'rxjs';
-
-
 // Get each thing you need separately from its module
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import { Subscription } from 'rxjs/Subscription';
-import { timer } from 'rxjs/observable/timer';
-
-import { fromEvent } from 'rxjs/observable/fromEvent';
-import { filter } from 'rxjs/operators';
+//
+// And version 6 changes this back again. As the tooling is
+// now mature enough, and we know how to write it correclty
+// we are back to:
+import { Observable, Observer, Subscription, fromEvent } from 'rxjs';
+// And this is ok again, because it is tree shakable, and will result in the same thing™
 
 // endregion
 
@@ -24,8 +19,7 @@ import { filter } from 'rxjs/operators';
   templateUrl: './raw.component.html'
 })
 export class RawComponent implements OnInit, OnDestroy {
-
-//////// v1 ///////////
+  //////// v1 ///////////
 
   v1() {
     this.currentDemo = 'Observable v1';
@@ -37,19 +31,16 @@ export class RawComponent implements OnInit, OnDestroy {
     const myObservable = (subscriber: Observer<string>) => {
       // Call observer methods when something happens
       subscriber.next('Hello, good looking!');
-    }
-
+    };
 
     ////// Observer/Subscriber ////////
     // An object with zero-to-three of these methods
     const mySubscriber: Observer<string> = {
-
       next: value => this.items.push(value),
 
-      error: (err: string) => this.errorMessage = err,
+      error: (err: string) => (this.errorMessage = err),
 
       complete: () => this.items.push('observable completed')
-
     };
 
     // Wrap as RxJS Observable for safety and features
@@ -59,7 +50,6 @@ export class RawComponent implements OnInit, OnDestroy {
     // Nothing happens until we subscribe!
     this.subscription = observable.subscribe(mySubscriber);
 
-
     ////// Alternative: Subscribe with callbacks
     // this.subscription = observable.subscribe(
     //   value => this.items.push(value),
@@ -68,7 +58,7 @@ export class RawComponent implements OnInit, OnDestroy {
     // );
   }
 
-//////// v2 ///////////
+  //////// v2 ///////////
 
   v2() {
     this.currentDemo = 'Observable v2';
@@ -76,30 +66,29 @@ export class RawComponent implements OnInit, OnDestroy {
 
     /////// Observable
     const observable = new Observable(observer => {
-        // Synchronous emits
-        observer.next('wait');
-        observer.next('for');
-        observer.next('it');
-        observer.next('...');
+      // Synchronous emits
+      observer.next('wait');
+      observer.next('for');
+      observer.next('it');
+      observer.next('...');
 
-        // observer.error('oh no!');
+      // observer.error('oh no!');
 
-        // Async - wait 2 seconds
-        setTimeout(() => {
-          observer.next('TA DA!'); // delayed emit
-          observer.complete();
-        }, 2000);
-      }
-    )
+      // Async - wait 2 seconds
+      setTimeout(() => {
+        observer.next('TA DA!'); // delayed emit
+        observer.complete();
+      }, 2000);
+    });
 
     this.subscription = observable.subscribe(
       value => this.items.push(value),
-      (err: string) => this.errorMessage = err,
+      (err: string) => (this.errorMessage = err),
       () => this.items.push('observable completed')
     );
   }
 
-//////// v 3 ///////////
+  //////// v 3 ///////////
 
   v3() {
     this.currentDemo = 'Observable v3';
@@ -110,12 +99,11 @@ export class RawComponent implements OnInit, OnDestroy {
 
     // Custom observable listens for input box keystrokes
     const keyupObservable = (subscriber: Observer<KeyboardEvent>) => {
-
       this.inputEl.addEventListener('keyup', listener);
 
       // return function to remove listener when unsubscribed
       return () => {
-         this.inputEl.removeEventListener('keyup', listener);
+        this.inputEl.removeEventListener('keyup', listener);
       };
 
       function listener(evt: KeyboardEvent) {
@@ -128,14 +116,12 @@ export class RawComponent implements OnInit, OnDestroy {
 
     this.subscription = observable.subscribe(
       value => this.items.push(this.inputEl.value),
-      (err: string) => this.errorMessage = err,
+      (err: string) => (this.errorMessage = err),
       () => this.items.push('observable completed')
     );
-
   }
 
-
-//////// v 4 ///////////
+  //////// v 4 ///////////
 
   v4() {
     this.currentDemo = 'Observable v4';
@@ -144,7 +130,7 @@ export class RawComponent implements OnInit, OnDestroy {
 
     /////// Observable
     // fromEvent: Observable creator replaces custom v3 observable
-    const observable = fromEvent(this.inputEl, 'keyup')
+    const observable = fromEvent(this.inputEl, 'keyup');
 
     // .pipe(
     //    // Piped operators: remember to import them!
@@ -153,13 +139,12 @@ export class RawComponent implements OnInit, OnDestroy {
 
     this.subscription = observable.subscribe(
       value => this.items.push(this.inputEl.value),
-      (err: string) => this.errorMessage = err,
+      (err: string) => (this.errorMessage = err),
       () => this.items.push('observable completed')
     );
-
   }
 
-//////// Unsubscribe /////
+  //////// Unsubscribe /////
 
   ngOnDestroy() {
     // Ultra-safe practice to unsubscribe when component destroyed
@@ -168,7 +153,7 @@ export class RawComponent implements OnInit, OnDestroy {
     }
   }
 
-//////// Component internals ///////////
+  //////// Component internals ///////////
   // region component internals
 
   // tslint:disable:member-ordering
@@ -176,8 +161,7 @@ export class RawComponent implements OnInit, OnDestroy {
   isHidden = true;
   subscription: Subscription;
 
-  @ViewChild('input')
-  inputElRef: ElementRef;
+  @ViewChild('input') inputElRef: ElementRef;
   private inputEl: HTMLInputElement;
 
   currentDemo = '';

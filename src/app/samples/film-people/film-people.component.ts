@@ -3,16 +3,11 @@
  */
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-
-import { Observable } from 'rxjs/Observable';
-
-import {
-  concatMap, catchError,
-  debounceTime, distinctUntilChanged,
-  map, switchMap} from 'rxjs/operators';
-
-import { Movie, People } from 'app/samples/sw-interfaces';
+import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { FilmPeopleService } from './film-people.service';
+
+
+
 
 @Component({
   selector: 'app-film-people',

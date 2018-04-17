@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SwPeopleService } from 'app/samples/sw-people.service';
+import { SwPeopleService } from '../../samples/sw-people.service-expand';
 
 @Component({
     selector: 'app-sw-people',

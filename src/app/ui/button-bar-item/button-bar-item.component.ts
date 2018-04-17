@@ -1,65 +1,62 @@
 import {
-    Component,
-    OnInit,
-    Input,
-    TemplateRef,
-    ViewContainerRef,
-    Directive,
-    AfterViewInit,
-    Self,
-    OnDestroy
+  Component,
+  Directive,
+  Input,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  ViewContainerRef
 } from '@angular/core';
 
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { ButtonbarService } from 'app/ui/button-bar/buttonbar.service';
+import { ButtonbarService } from '../../ui/button-bar/buttonbar.service';
 
 @Component({
-    // tslint:disable-next-line:component-selector
-    selector: 'button-bar-item',
-    template: `<div class="tile">
+  // tslint:disable-next-line:component-selector
+  selector: 'button-bar-item',
+  template: `<div class="tile">
     <ng-content></ng-content>
     </div>`,
-    styles: []
+  styles: []
 })
 export class ButtonBarItemComponent {
-    constructor() {}
+  constructor() {}
 }
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
-    selector: '[menuText]'
+  // tslint:disable-next-line:directive-selector
+  selector: '[menuText]'
 })
 export class ButtonBarItemDirective implements OnInit, OnDestroy {
-    @Input('menuText') menuText = '';
-    showContent = false;
-    onDestroy = new Subject<void>();
+  @Input('menuText') menuText = '';
+  showContent = false;
+  onDestroy = new Subject<void>();
 
-    constructor(
-        private templateRef: TemplateRef<any>,
-        private viewContainer: ViewContainerRef,
-        public bbs: ButtonbarService
-    ) {
-        // console.log(this);
-    }
+  constructor(
+    private templateRef: TemplateRef<any>,
+    private viewContainer: ViewContainerRef,
+    public bbs: ButtonbarService
+  ) {
+    // console.log(this);
+  }
 
-    ngOnInit() {
-        this.bbs
-            .addButton({ title: this.menuText }).pipe(
-              takeUntil(this.onDestroy)
-            )
-            .subscribe(_ => {
-                this.showContent = !this.showContent;
-                if (this.showContent) {
-                    this.viewContainer.createEmbeddedView(this.templateRef);
-                } else {
-                    this.viewContainer.clear();
-                }
-            });
-    }
+  ngOnInit() {
+    this.bbs
+      .addButton({ title: this.menuText })
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(_ => {
+        this.showContent = !this.showContent;
+        if (this.showContent) {
+          this.viewContainer.createEmbeddedView(this.templateRef);
+        } else {
+          this.viewContainer.clear();
+        }
+      });
+  }
 
-    ngOnDestroy() {
-      this.onDestroy.next();
-    }
+  ngOnDestroy() {
+    this.onDestroy.next();
+  }
 }

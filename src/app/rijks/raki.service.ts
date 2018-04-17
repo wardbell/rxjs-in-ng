@@ -1,16 +1,10 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-
-import { fromPromise } from 'rxjs/observable/fromPromise';
-import { of } from 'rxjs/observable/of';
-import { timer } from 'rxjs/observable/timer';
-
+import { Observable, Subject, of, timer } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
-import { CollectionObject, ArtObject, RakiObject } from './rakiCollection';
+import { ArtObject, CollectionObject, RakiObject } from './rakiCollection';
 
 const key = '4a3Fxmua';
 
@@ -35,10 +29,12 @@ export class RakiService {
 
   detail$: Observable<RakiObject.ArtDetailObject[]> = this.detailNumber.pipe(
     switchMap(
-      number => number ?
-        this.http.get<RakiObject.RootObject>(detail(number)).pipe(
-          map(r => [r.artObject])
-        ) : of([])
+      number =>
+        number
+          ? this.http
+              .get<RakiObject.RootObject>(detail(number))
+              .pipe(map(r => [r.artObject]))
+          : of([])
     )
   );
 
@@ -48,14 +44,15 @@ export class RakiService {
     type: 'painting'
   };
 
-  randomImage$ = this.http.get<CollectionObject>(collection(this.selection)).pipe(
-    tap(r => (this.artCount = r.count)),
-    switchMap(() => timer(0, 10000)),
-    switchMap(() => this.getArtObject$),
-    switchMap(artObject =>
-      fromPromise(this.preload(artObject.webImage.url))
-    )
-  );
+  randomImage$ = this.http
+    .get<CollectionObject>(collection(this.selection))
+    .pipe(
+      tap(r => (this.artCount = r.count)),
+      switchMap(() => timer(0, 20000)),
+      switchMap(() => this.getArtObject$),
+      // please note that switchmMap handles a promise also!
+      switchMap(artObject => this.preload(artObject.webImage.url))
+    );
 
   private getArtObject$: Observable<ArtObject> = Observable.create(obs => {
     obs.next({
@@ -63,21 +60,20 @@ export class RakiService {
       p: Math.floor(Math.random() * this.artCount)
     });
     obs.complete();
-  })
-  .pipe(
-    switchMap(selection => this.http.get<CollectionObject>(collection(selection))
-      .pipe(
-        map(r => r.artObjects[0]),
-        catchError(() =>
-          timer(500).pipe(
-            switchMap(() => this.getArtObject$)
-          )
+  }).pipe(
+    switchMap(selection =>
+      this.http
+        .get<CollectionObject>(collection(selection))
+        .pipe(
+          map(r => r.artObjects[0]),
+          catchError(() => timer(500).pipe(switchMap(() => this.getArtObject$)))
         )
-      )
     ),
-    switchMap((artObject: ArtObject) =>
-      artObject.webImage &&
-      artObject.webImage.url ? of(artObject) : this.getArtObject$
+    switchMap(
+      (artObject: ArtObject) =>
+        artObject.webImage && artObject.webImage.url
+          ? of(artObject)
+          : this.getArtObject$
     )
   );
 
@@ -89,16 +85,15 @@ export class RakiService {
 
   artist(q) {
     console.log(q, serialize({ q }));
-    return this.http.get<CollectionObject>(collection({ q })).pipe(
-      map(r => r.artObjects),
-      map((artObjects: ArtObject[]) =>
-        artObjects.reduce(
-            (acc, e) => (e.hasImage ? acc.concat(e) : acc),
-            []
-        )
-      ),
-      tap(r => console.log(r))
-    );
+    return this.http
+      .get<CollectionObject>(collection({ q }))
+      .pipe(
+        map(r => r.artObjects),
+        map((artObjects: ArtObject[]) =>
+          artObjects.reduce((acc, e) => (e.hasImage ? acc.concat(e) : acc), [])
+        ),
+        tap(r => console.log(r))
+      );
   }
 
   private preload(url) {

@@ -4,7 +4,7 @@
  */
 // tslint:disable:member-ordering
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { MultiStreamService } from './multi-stream.service';
 
 @Component({

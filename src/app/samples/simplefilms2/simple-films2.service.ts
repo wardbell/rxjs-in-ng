@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RootMovies, Movie } from '../sw-interfaces';
-import { SwUrlService } from 'app/samples/sw-url.service';
+import { SwUrlService } from '../../samples/sw-url.service';
 
 @Injectable()
 export class SimpleFilmsService2 {

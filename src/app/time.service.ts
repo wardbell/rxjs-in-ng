@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { interval } from 'rxjs/observable/interval';
+import { interval } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 
 @Injectable()
 export class TimeService {
-
   time(label = '') {
     return interval(400).pipe(
       take(30), // fail safe, stop emitting after ~12 secs
@@ -21,12 +19,9 @@ export class TimeService {
 
       map(() => new Date().toLocaleTimeString()), // return time as a string
 
-      tap(
-          time => console.log(`${label} time`, time),
-          null,
-          () => console.log(`${label} TimeService timer completed`),
+      tap(time => console.log(`${label} time`, time), null, () =>
+        console.log(`${label} TimeService timer completed`)
       )
     );
   }
-
 }
