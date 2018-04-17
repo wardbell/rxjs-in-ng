@@ -4,14 +4,11 @@
 </ng-container>
 
 <div class="container">
-  <h1 class="header">Observable samples</h1>
-  <div class="buttonbar">
-    <button-bar>
-      <button routerLink="/" class="home">Home</button>
-      <button routerLink="/movie/1" class="router">Router</button>
-      <button class="toggleSwUrl" (click)="toggleSwUrl()">Toggle SwUrl</button>
-    </button-bar>
-  </div>
+  <button-bar>
+    <button routerLink="/" class="home">Home</button>
+    <button routerLink="/movie/1" class="router">Router</button>
+    <button class="toggleSwUrl" (click)="toggleSwUrl()">Toggle SwUrl</button>
+  </button-bar>
   <!-- <div class="MainHolder" [style.backgroundImage]="raki.randomImage$ | async"> -->
   <div class="MainHolder" #main>
     <router-outlet></router-outlet>

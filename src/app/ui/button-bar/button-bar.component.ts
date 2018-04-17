@@ -8,10 +8,8 @@ import { ButtonbarService, Button } from './buttonbar.service';
   // tslint:disable-next-line:component-selector
   selector: 'button-bar',
   template: `
-    <div class="buttonbar">
         <button *ngFor="let b of bbs.buttons$|async" (click)="bbs.activate(b,$event)">{{b.title}}</button>
         <ng-content></ng-content>
-    </div>
     `
 })
 // tslint:disable-next-line:component-class-suffix

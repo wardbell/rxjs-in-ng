@@ -84,10 +84,10 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    OnoffbuttonModule,
     HttpClientModule,
     ReactiveFormsModule,
     HttpClientJsonpModule,
-    OnoffbuttonModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
       passThruUnknownUrl: true
     }),
