@@ -46,6 +46,7 @@ import { SamplesComponent } from './samples.component';
 import { FilmPeopleComponent } from './samples/film-people/film-people.component';
 import { OnoffbuttonModule } from 'onoffbutton';
 import { SeNeonModule } from 'se-neon';
+import { SimplefilmErrorComponent } from './samples/simplefilm-error/simplefilm-error.component';
 
 const routes: Routes = [
   { path: '', component: SamplesComponent },
@@ -81,6 +82,7 @@ const routes: Routes = [
     SimplefilmsComponent,
     Simplefilms2Component,
     Simplefilms3Component,
+    SimplefilmErrorComponent,
   ],
   imports: [
     BrowserModule,
