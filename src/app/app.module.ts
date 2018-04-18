@@ -39,6 +39,8 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './samples/in-memory-data.service';
 import { Simplefilms2Component } from './samples/simplefilms2/simplefilms2.component';
 import { Simplefilms3Component } from './samples/simplefilms3/simplefilms3.component';
+import { Simplefilms4Component } from './samples/simplefilms4/simplefilms4.component';
+import { Simplefilms5Component } from './samples/simplefilms5/simplefilms5.component';
 import { SwUrlService } from './samples/sw-url.service';
 import { MovieComponent } from './samples/router/movie.component';
 import { SamplesComponent } from './samples.component';
@@ -46,7 +48,6 @@ import { SamplesComponent } from './samples.component';
 import { FilmPeopleComponent } from './samples/film-people/film-people.component';
 import { OnoffbuttonModule } from 'onoffbutton';
 import { SeNeonModule } from 'se-neon';
-import { SimplefilmErrorComponent } from './samples/simplefilm-error/simplefilm-error.component';
 
 const routes: Routes = [
   { path: '', component: SamplesComponent },
@@ -82,7 +83,8 @@ const routes: Routes = [
     SimplefilmsComponent,
     Simplefilms2Component,
     Simplefilms3Component,
-    SimplefilmErrorComponent,
+    Simplefilms4Component,
+    Simplefilms5Component,
   ],
   imports: [
     BrowserModule,

@@ -17,11 +17,19 @@ import { SwUrlService } from '../sw-url.service';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-simplefilm-error',
-  templateUrl: './simplefilm-error.component.html',
-  styles: []
+  selector: 'app-simplefilms5',
+  template: `
+    <h4>Simple Movie Err</h4>
+    <input [formControl]="input">
+
+    <p>Error Isolation:</p>
+       {{filmsIsolation$|async}}
+
+    <p>No Error Isolation:</p>
+       {{filmsNoIsolation$|async}}
+  `
 })
-export class SimplefilmErrorComponent implements OnInit {
+export class Simplefilms5Component implements OnInit {
   films: Movie[];
 
   input = new FormControl('');

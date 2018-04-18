@@ -1,5 +1,7 @@
 /**
  *  add operators: catchError
+ *  use .pipe()
+ *  AsyncPipe to display films
  */
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../../samples/sw-interfaces';
@@ -9,15 +11,16 @@ import { Observable } from 'rxjs';
 // Import RxJS operators
 import { catchError } from 'rxjs/operators';
 
-import { SimpleFilmsService3 } from './simple-films3.service';
+import { SimpleFilmsService4 } from './simple-films4.service';
 
 @Component({
-  selector: 'app-simplefilms3',
+  selector: 'app-simplefilms4',
   template: `
 
-  <h3>Simple Films 3: asyncPipe and catch</h3>
+  <h3>Simple Films 4: asyncPipe</h3>
 
-  <div *ngFor="let film of films">{{film.title}}</div>
+  <!-- Show films using AsyncPipe -->
+  <div *ngFor="let film of films$ | async">{{film.title}}</div>
 
   <div *ngIf="errorMsg" class="error">{{errorMsg}}</div>
 
@@ -26,13 +29,16 @@ import { SimpleFilmsService3 } from './simple-films3.service';
   <button (click)="refresh()">Refresh list</button>
 
   `,
-  providers: [ SimpleFilmsService3 ]
+  providers: [ SimpleFilmsService4 ]
 })
-export class Simplefilms3Component implements OnInit {
+export class Simplefilms4Component implements OnInit {
   errorMsg: string;
-  films: Movie[];
 
-  constructor(private filmsService: SimpleFilmsService3) {}
+  // Expose "OBSERVABLE of Movies" instead of Movie[] with AsyncPipe
+  // Note the `$` suffix
+  films$: Observable<Movie[]>;
+
+  constructor(private filmsService: SimpleFilmsService4) {}
 
   ngOnInit() {
     this.refresh();
@@ -41,16 +47,15 @@ export class Simplefilms3Component implements OnInit {
   refresh() {
     this.errorMsg = '';
 
-    this.filmsService.getFilms().subscribe(
+    // Set the OBSERVABLE<MOVIE[]>
+    this.films$ = this.filmsService.getFilms().pipe(
 
-      // Service gives us what we want ... films
-      films => (this.films = films),
-
-      // Show user-friendly message and display it
-      errorMessage => {
+      // CATCH the user friendly message and display it
+      catchError(errorMessage => {
         this.errorMsg = errorMessage;
         return []; // return empty list for display
-      }
+      })
+
     );
   }
 
