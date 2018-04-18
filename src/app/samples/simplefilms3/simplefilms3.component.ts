@@ -15,7 +15,7 @@ import { SimpleFilmsService3 } from './simple-films3.service';
   selector: 'app-simplefilms3',
   template: `
 
-  <h3>Simple Films 3: asyncPipe and catch</h3>
+  <h3>Simple Films 3: map and catch operators</h3>
 
   <div *ngFor="let film of films">{{film.title}}</div>
 

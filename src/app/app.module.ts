@@ -40,7 +40,7 @@ import { InMemoryDataService } from './samples/in-memory-data.service';
 import { Simplefilms2Component } from './samples/simplefilms2/simplefilms2.component';
 import { Simplefilms3Component } from './samples/simplefilms3/simplefilms3.component';
 import { Simplefilms4Component } from './samples/simplefilms4/simplefilms4.component';
-import { Simplefilms5Component } from './samples/simplefilms5/simplefilms5.component';
+import { ErrorIsolationComponent } from './samples/error-isolation/error-isolation.component';
 import { SwUrlService } from './samples/sw-url.service';
 import { MovieComponent } from './samples/router/movie.component';
 import { SamplesComponent } from './samples.component';
@@ -84,7 +84,7 @@ const routes: Routes = [
     Simplefilms2Component,
     Simplefilms3Component,
     Simplefilms4Component,
-    Simplefilms5Component,
+    ErrorIsolationComponent,
   ],
   imports: [
     BrowserModule,
