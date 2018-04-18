@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class SwUrlService {
   private _url: string;
-  private _urlGood = false;
+  private _urlGood = true;
 
   get isGood() {
     return this._urlGood;
