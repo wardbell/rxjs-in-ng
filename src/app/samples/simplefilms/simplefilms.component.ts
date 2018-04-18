@@ -6,14 +6,17 @@ import { SimpleFilmsService } from './simple-films.service';
   selector: 'app-simplefilms',
   template: `
 
-  <h3>Simple Films 1: get and subscribe</h3>
+  <h3>Simple Films 1: get and subscribe and errorhandling</h3>
 
-  <div *ngFor="let film of films">{{film.title}}<div>
+  <div *ngFor="let film of films">{{film.title}}</div>
+
+  <div *ngIf="errorMsg" class="error">{{errorMsg}}</div>
   `,
-  providers: [ SimpleFilmsService ]
+  providers: [SimpleFilmsService]
 })
 export class SimplefilmsComponent implements OnInit {
   films: Movie[];
+  errorMsg: string;
 
   constructor(private filmsService: SimpleFilmsService) {}
 
@@ -21,7 +24,12 @@ export class SimplefilmsComponent implements OnInit {
     const films$ = this.filmsService.getFilms();
 
     films$.subscribe(
-      data => (this.films = data.results)
+      data => (this.films = data.results),
+
+      // Report errors in this 2nd subscribe parameter
+      // err => {
+      //   this.errorMsg = err.message;
+      // }
     );
   }
 }

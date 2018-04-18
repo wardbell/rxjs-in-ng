@@ -6,14 +6,14 @@ import { SimpleFilmsService2 } from './simple-films2.service';
   selector: 'app-simplefilms2',
   template: `
 
-  <h3>Simple Films 2: error and add</h3>
+  <h3>Simple Films 2: add</h3>
 
   <div *ngFor="let film of films">{{film.title}}</div>
 
   <div *ngIf="errorMsg" class="error">{{errorMsg}}</div>
 
   <p><i>Refresh after adding</i></p>
-  <button (click)="add()">Add movie</button>
+  <button (click)="add()">Generate movie</button>
   <button (click)="refresh()">Refresh list</button>
   `,
 
@@ -40,7 +40,6 @@ export class Simplefilms2Component implements OnInit {
 
       // Report errors in this 2nd subscribe parameter
       err => {
-        console.error(err);
         this.errorMsg = err.message;
       }
     );
@@ -50,6 +49,8 @@ export class Simplefilms2Component implements OnInit {
     const movie = { title: 'A New Observer!' } as Movie;
 
     // Don't forget to subscribe!
-    this.filmsService.add(movie); // .subscribe();
+    this.filmsService.add(movie).subscribe();
+
+    this.refresh();
   }
 }

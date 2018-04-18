@@ -25,7 +25,7 @@ import { SimpleFilmsService3 } from './simple-films3.service';
   <div *ngIf="errorMsg" class="error">{{errorMsg}}</div>
 
   <p><i>Refresh after adding</i></p>
-  <button (click)="add()">Add movie</button>
+  <button (click)="add()">Generate movie</button>
   <button (click)="refresh()">Refresh list</button>
 
   `,

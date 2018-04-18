@@ -1,17 +1,14 @@
 // tslint:disable:member-ordering
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RootMovies, Movie } from '../sw-interfaces';
-import { SwUrlService } from '../../samples/sw-url.service';
+import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
-
-// As of v5.5: import symbols from operators
 import { catchError, map } from 'rxjs/operators';
 
-// Before v5.5: Add the map operator to Observable
-// import 'rxjs/add/operator/catch';
-// import 'rxjs/add/operator/map';
+import { SwUrlService } from '../../samples/sw-url.service';
+import { Movie, RootMovies } from '../sw-interfaces';
+import { Observable, throwError } from 'rxjs';
+
+
 
 @Injectable()
 export class SimpleFilmsService3 {
@@ -40,7 +37,7 @@ export class SimpleFilmsService3 {
         // log HTTP error and ...
         console.error('GET failed', err);
         // rethrow as a user-friendly message
-        throw new Error('Sorry but can\'t add movies right now; please try again later')
+        return throwError('Sorry but can\'t add movies right now; please try again later')
       })
     );
   }

@@ -1,22 +1,16 @@
 // tslint:disable:member-ordering
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+import { Observable, Subject, combineLatest } from 'rxjs';
+import { map, scan, startWith, tap } from 'rxjs/operators';
+
+import { Movie, RootMovies } from '../sw-interfaces';
+import { SwUrlService } from '../sw-url.service';
+
 /**
  *  Merging three streams
  */
-import { Observable, Subject } from 'rxjs';
-import {
-  map,
-  merge,
-  scan,
-  shareReplay,
-  tap,
-  combineLatest,
-  startWith
-} from 'rxjs/operators';
-
-import { SwUrlService } from '../sw-url.service';
-import { RootMovies, Movie } from '../sw-interfaces';
 
 @Injectable()
 export class MultiStreamService {
@@ -43,21 +37,20 @@ export class MultiStreamService {
   }) as Observable<Movie[]>;
 
   // 3. Movies we add during this user session
-
   private newMoviesSubject = new Subject<Movie[]>();
   private newMovies$ = this.newMoviesSubject.pipe(
     startWith([]),
     // Create a new result array when any source emits a film array.
     scan<Movie[]>((movies, newMovies) => movies.concat(newMovies)),
-    tap(m => console.log('newMovies', m))
   );
 
   // MERGE the THREE movie sources
   // into immutable array of immutable objects
-  films$ = this.cloudMovies.pipe(
-    tap(d => console.log('cloudmovies', d)),
-    combineLatest(this.localStorageMovies, this.newMovies$),
-    tap(d => console.log('COMBINELATEST', d)),
+  films$ = combineLatest(
+    this.cloudMovies,
+    this.localStorageMovies,
+    this.newMovies$
+  ).pipe(
     // cobine all 3 sources in a single array
     map(([cloud, local, newMovies]) => [...cloud, ...local, ...newMovies]),
     // Sort the combined film array
