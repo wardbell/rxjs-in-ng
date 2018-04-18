@@ -9,27 +9,24 @@ import { SimpleFilmsService } from './simple-films.service';
   <h3>Simple Films 1: get and subscribe and errorhandling</h3>
 
   <div *ngFor="let film of films">{{film.title}}</div>
-
-  <div *ngIf="errorMsg" class="error">{{errorMsg}}</div>
   `,
   providers: [SimpleFilmsService]
 })
 export class SimplefilmsComponent implements OnInit {
-  films: Movie[];
   errorMsg: string;
+  films: Movie[];
 
   constructor(private filmsService: SimpleFilmsService) {}
 
   ngOnInit() {
-    const films$ = this.filmsService.getFilms();
+    this.getData()
+  }
 
-    films$.subscribe(
+  getData() {
+    this.filmsService.getFilms().subscribe(
+
       data => (this.films = data.results),
 
-      // Report errors in this 2nd subscribe parameter
-      // err => {
-      //   this.errorMsg = err.message;
-      // }
     );
   }
 }

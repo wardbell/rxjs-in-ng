@@ -24,9 +24,7 @@ import { SimpleFilmsService4 } from './simple-films4.service';
 
   <div *ngIf="errorMsg" class="error">{{errorMsg}}</div>
 
-  <p><i>Refresh after adding</i></p>
   <button (click)="add()">Generate movie</button>
-  <button (click)="refresh()">Refresh list</button>
 
   `,
   providers: [ SimpleFilmsService4 ]
@@ -41,10 +39,10 @@ export class Simplefilms4Component implements OnInit {
   constructor(private filmsService: SimpleFilmsService4) {}
 
   ngOnInit() {
-    this.refresh();
+    this.getData();
   }
 
-  refresh() {
+  getData() {
     this.errorMsg = '';
 
     // Set the OBSERVABLE<MOVIE[]>
@@ -63,9 +61,8 @@ export class Simplefilms4Component implements OnInit {
     const movie = { title: 'A New Observer!' } as Movie;
 
     this.filmsService.add(movie).subscribe(
-      () => this.refresh(),
-      errorMessage => {
-        this.errorMsg = errorMessage;
-      });
+      () => this.getData(),
+      errorMessage => this.errorMsg = errorMessage
+    );
   }
 }

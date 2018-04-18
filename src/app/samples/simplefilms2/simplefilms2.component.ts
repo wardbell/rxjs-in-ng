@@ -12,45 +12,38 @@ import { SimpleFilmsService2 } from './simple-films2.service';
 
   <div *ngIf="errorMsg" class="error">{{errorMsg}}</div>
 
-  <p><i>Refresh after adding</i></p>
   <button (click)="add()">Generate movie</button>
-  <button (click)="refresh()">Refresh list</button>
   `,
 
   providers: [ SimpleFilmsService2 ]
 })
 export class Simplefilms2Component implements OnInit {
   errorMsg: string;
-
   films: Movie[];
 
   constructor(private filmsService: SimpleFilmsService2) {}
 
   ngOnInit() {
-    this.refresh();
+    this.getData();
   }
 
-  refresh() {
-    this.errorMsg = '';
-
+  getData() {
     this.filmsService.getFilms().subscribe(
 
-      // Why digging in for the results? Yuck!
       data => (this.films = data.results),
 
       // Report errors in this 2nd subscribe parameter
-      err => {
-        this.errorMsg = err.message;
-      }
+      // err => {
+      //   this.errorMsg = err.message;
+      // }
     );
   }
 
   add() {
     const movie = { title: 'A New Observer!' } as Movie;
 
-    // Don't forget to subscribe!
-    this.filmsService.add(movie).subscribe();
+    this.filmsService.add(movie);
 
-    this.refresh();
+    this.getData();
   }
 }

@@ -20,7 +20,7 @@ import { of } from 'rxjs';
 @Component({
   selector: 'app-error-isolation',
   template: `
-    <h4>Error Isolation</h4>
+    <h3>Error Isolation</h3>
     <input [formControl]="input" placeholder="Enter film id">
 
     <p>Without error isolation:</p>
