@@ -32,7 +32,7 @@ import { Simplefilms2Component } from './samples/simplefilms2/simplefilms2.compo
 import { Simplefilms3Component } from './samples/simplefilms3/simplefilms3.component';
 import { Simplefilms4Component } from './samples/simplefilms4/simplefilms4.component';
 import { SwPeopleFindComponent } from './samples/sw-people-find/sw-people-find.component';
-import { SwPeopleService } from './samples/sw-people.service-expand';
+import { SwPeopleService } from './samples/sw-people-expand.service';
 import { SwPeopleComponent } from './samples/sw-people/sw-people.component';
 import { SwUrlService } from './samples/sw-url.service';
 import { TakeUntilComponent } from './samples/take-until/take-until.component';
