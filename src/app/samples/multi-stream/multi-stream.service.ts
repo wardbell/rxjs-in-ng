@@ -20,8 +20,7 @@ export class MultiStreamService {
   private cloudMovies = this.http
     .get<RootMovies>(this.url)
     .pipe(
-      map(rm => rm.results),
-      tap(movies => console.log('Hit Endpoint', movies))
+      map(rm => rm.results)
     );
 
   // 2. Movies held in local browser storage
