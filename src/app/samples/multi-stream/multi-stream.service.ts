@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { map, scan, startWith, tap } from 'rxjs/operators';
 
-import { Movie, RootMovies } from '../sw-interfaces';
+import { Movie, NewMovieData, RootMovies } from '../sw-interfaces';
 import { SwUrlService } from '../sw-url.service';
 
 /**
@@ -39,9 +39,11 @@ export class MultiStreamService {
   // 3. Movies we add during this user session
   private newMoviesSubject = new Subject<Movie[]>();
   private newMovies$ = this.newMoviesSubject.pipe(
-    startWith([]),
+
     // Create a new result array when any source emits a film array.
     scan<Movie[]>((movies, newMovies) => movies.concat(newMovies)),
+
+    startWith([]), // begin with empty array of new movies
   );
 
   // MERGE the THREE movie sources
@@ -51,18 +53,19 @@ export class MultiStreamService {
     this.localStorageMovies,
     this.newMovies$
   ).pipe(
-    // cobine all 3 sources in a single array
+
+    // combine all 3 sources in a single array
     map(([cloud, local, newMovies]) => [...cloud, ...local, ...newMovies]),
+
     // Sort the combined film array
     map(films =>
       films.sort((x, y) => (x.release_date < y.release_date ? -1 : 1))
     )
   );
 
-  add(newMovie: Movie) {
-    // make sure we have a "proper" formated date
+  add(newMovie: NewMovieData) {
     newMovie = formatReleaseDate(newMovie);
-    this.saveNewMovie(newMovie);
+    this.saveNewMovieToLocalStorage(newMovie);
 
     // Push the update into the film$ observable
     this.newMoviesSubject.next([newMovie]);
@@ -74,12 +77,16 @@ export class MultiStreamService {
     }
   }
 
+
+
+  ///// internal ////
+
   /**
    * update localStorage to save my added movie
    * in a non-demo program, you will put some logic here
    * that saves your data to persistent storage
    */
-  private saveNewMovie(newMovie: Movie) {
+  private saveNewMovieToLocalStorage(newMovie: NewMovieData) {
     this.localStorageMovies.subscribe(list => {
       if (localStorage) {
         list = list || [];
@@ -93,11 +100,7 @@ export class MultiStreamService {
   }
 }
 
-/// helpers ///
-
-function formatReleaseDate(movie: Movie) {
-  // Have to bump the year by 1 to get property date
-  const releaseYear = (+movie.release_date).toString();
-  movie.release_date = new Date(releaseYear).toISOString();
+function formatReleaseDate(movie: NewMovieData) {
+  movie.release_date = new Date(+movie.year, 1).toISOString();
   return movie;
 }

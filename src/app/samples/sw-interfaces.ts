@@ -25,6 +25,10 @@ export interface Movie {
     id: number;
 }
 
+export interface NewMovieData extends Movie {
+  year?: string;
+}
+
 export interface People {
     name: string;
     height?: string;
