@@ -1,65 +1,53 @@
 // tslint:disable:member-ordering
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject, empty, of } from 'rxjs';
-import {
-  catchError,
-  concat,
-  distinctUntilChanged,
-  expand,
-  map,
-  merge,
-  mergeMap,
-  scan,
-  shareReplay,
-  startWith,
-  tap,
-  take
-} from 'rxjs/operators';
-import { People, RootPeople } from '../samples/sw-interfaces';
 
-const log = (desc: string) => (...args) => console.log(desc, ...args);
+import { Observable, empty, of } from 'rxjs';
+import { catchError, concat, distinctUntilChanged, expand, map, merge, scan, shareReplay, startWith, tap } from 'rxjs/operators';
+
+import { RootPeople } from '../samples/sw-interfaces';
 
 @Injectable()
 export class SwPeopleService {
-  private addOne$ = new ReplaySubject<People[]>(Number.POSITIVE_INFINITY);
-
-  private additions$ = this.addOne$.pipe(
-    startWith([]),
-    scan((acc, ext) => acc.concat(ext), [])
-  );
-
+  // use http to get a singe page with people entries
   private load = (url: string): Observable<RootPeople> =>
     this.http
       .get<RootPeople>(url)
       .pipe(
         catchError(_ => of<RootPeople>(null)),
         tap(() => console.log('fetched from back-end: ' + url))
-      )
+      );
 
-      private getPeopleFromBackend$ = this.load(
-        `https://swapi.co/api/people/`
-      ).pipe(
-        expand(r => (r.next ? this.load(r.next) : empty())),
-    map(r => r.results),
-    scan((acc, cur) => acc.concat(cur), []),
-    shareReplay(1)
+  // load all people form the paged API
+  // start off with loading the first page.
+  private people$ = this.load(`https://swapi.co/api/people/`).pipe(
+    // then use expand to insert the rest of the pages.
+    expand(r => (r.next ? this.load(r.next) : empty())),
+    map(r => r.results),  // We only need the results
+    // use scan to take all the incomming results from above
+    // and accumulate them into a single arrya, that emmits on every page
+    scan((allPeople, incommingPage) => allPeople.concat(incommingPage), []),
+    map(list => list.sort((x, y) => (x.name < y.name ? -1 : 1))), // Keep the list oredered
+    shareReplay(1),
   );
 
-  people$ = this.getPeopleFromBackend$.pipe(
-    mergeMap(list =>
-      this.additions$.pipe(map(additions => list.concat(additions)))
+  // an observable of boolean to indicate loading
+  loading$ = of(true).pipe( // Yes, it si loading now
+    // merge in the people array
+    merge(this.people$.pipe(
+      map(_ => true),    // yes I'm still loading
+      // Concat on complete. (when ale apges are in) It will be true
+      concat(of(false)))
     ),
-    map(list => list.sort((x, y) => (x.name < y.name ? -1 : 1)))
+    distinctUntilChanged() // don't toggle anymore once done.
   );
 
-  loading$ = of(true).pipe(
-    merge(this.getPeopleFromBackend$.pipe(map(_ => true), concat(of(false)))),
-    distinctUntilChanged()
-  );
-
+  // use the people observable to count the number of results.
   count$ = this.people$.pipe(map((list: any[]) => list.length), startWith(0));
 
+  // find a single person in the list, by using
+  // again this uses the people$ observable to get
+  // and then use plain JS to find the correct one.
   find(partial) {
     return this.people$.pipe(
       map(list =>
@@ -72,18 +60,6 @@ export class SwPeopleService {
       )
     );
   }
-
-  add(newCharacter: People) {
-    // generate an id! just for demo purposes.
-    newCharacter.url = new Date().getTime().toString(36);
-    /**
-     * Make sure you do the actual save to DB in here.
-     * as this function now only updates the local
-     */
-    return this.addOne$.next([newCharacter]);
-  }
-
-  save(update: People) {}
 
   constructor(private http: HttpClient) {}
 }

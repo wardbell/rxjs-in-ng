@@ -1,53 +1,50 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
-import { RouterModule, Routes, Router } from '@angular/router';
-
 // import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+
+import { OnoffbuttonModule } from 'onoffbutton';
+import { SeNeonModule } from 'se-neon';
 
 import { AppComponent } from './app.component';
+import { ArtDetailComponent } from './rijks/art-detail/art-detail.component';
 import { ArtistsComponent } from './rijks/artists/artists.component';
+import { RakiService } from './rijks/raki.service';
+import { SamplesComponent } from './samples.component';
 import { AsyncPipeComponent } from './samples/async-pipe/async-pipe.component';
-import { ButtonBar } from './ui/button-bar/button-bar.component';
-  import {
-    ButtonBarItemComponent,
-    ButtonBarItemDirective
-  } from './ui/button-bar-item/button-bar-item.component';
-import { ButtonbarService } from './ui/button-bar/buttonbar.service';
+import { CompAliveObsComponent } from './samples/comp-alive-obs/comp-alive-obs.component';
 import { CompAliveComponent } from './samples/comp-alive/comp-alive.component';
 import { CompIsThereComponent } from './samples/comp-is-there/comp-is-there.component';
-import { CompAliveObsComponent } from './samples/comp-alive-obs/comp-alive-obs.component';
-import { TakeUntilComponent } from './samples/take-until/take-until.component';
-import { TakeWhileComponent } from './samples/take-while/take-while.component';
-import { TimeService } from './time.service';
+import { ErrorIsolationComponent } from './samples/error-isolation/error-isolation.component';
+import { FilmPeopleComponent } from './samples/film-people/film-people.component';
+import { GiphyService } from './samples/giphy.service';
+import { InMemoryDataService } from './samples/in-memory-data.service';
 import { LeakyComponent } from './samples/leaky-component/leaky.component';
 import { MultiStreamComponent } from './samples/multi-stream/multi-stream.component';
 import { RawComponent } from './samples/raw/raw.component';
+import { MovieComponent } from './samples/router/movie.component';
 import { RxOperatorComponent } from './samples/rx-operator/rx-operator.component';
-import { SwPeopleComponent } from './samples/sw-people/sw-people.component';
-import { SwPeopleService } from './samples/sw-people.service-expand';
-import { SwPeopleFindComponent } from './samples/sw-people-find/sw-people-find.component';
-import { GiphyService } from './samples/giphy.service';
-import { WhipwheehwComponent } from './samples/whipWheehw/whipwheehw.component';
-import { WikipediaService } from './samples/wikipedia.service';
-import { WikipediaComponent } from './samples/wikipedia/wikipedia.component';
-import { RakiService } from './rijks/raki.service';
-import { ArtDetailComponent } from './rijks/art-detail/art-detail.component';
 import { SimplefilmsComponent } from './samples/simplefilms/simplefilms.component';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './samples/in-memory-data.service';
 import { Simplefilms2Component } from './samples/simplefilms2/simplefilms2.component';
 import { Simplefilms3Component } from './samples/simplefilms3/simplefilms3.component';
 import { Simplefilms4Component } from './samples/simplefilms4/simplefilms4.component';
-import { ErrorIsolationComponent } from './samples/error-isolation/error-isolation.component';
+import { SwPeopleFindComponent } from './samples/sw-people-find/sw-people-find.component';
+import { SwPeopleService } from './samples/sw-people.service-expand';
+import { SwPeopleComponent } from './samples/sw-people/sw-people.component';
 import { SwUrlService } from './samples/sw-url.service';
-import { MovieComponent } from './samples/router/movie.component';
-import { SamplesComponent } from './samples.component';
+import { TakeUntilComponent } from './samples/take-until/take-until.component';
+import { TakeWhileComponent } from './samples/take-while/take-while.component';
+import { WhipwheehwComponent } from './samples/whipWheehw/whipwheehw.component';
+import { WikipediaService } from './samples/wikipedia.service';
+import { WikipediaComponent } from './samples/wikipedia/wikipedia.component';
 
-import { FilmPeopleComponent } from './samples/film-people/film-people.component';
-import { OnoffbuttonModule } from 'onoffbutton';
-import { SeNeonModule } from 'se-neon';
+import { TimeService } from './time.service';
+import { ButtonBarItemComponent, ButtonBarItemDirective } from './ui/button-bar-item/button-bar-item.component';
+import { ButtonBar } from './ui/button-bar/button-bar.component';
+import { ButtonbarService } from './ui/button-bar/buttonbar.service';
 
 const routes: Routes = [
   { path: '', component: SamplesComponent },
@@ -58,33 +55,33 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    ArtDetailComponent,
+    ArtistsComponent,
     AsyncPipeComponent,
     ButtonBar,
     ButtonBarItemComponent,
     ButtonBarItemDirective,
-    CompIsThereComponent,
     CompAliveComponent,
     CompAliveObsComponent,
+    CompIsThereComponent,
+    ErrorIsolationComponent,
     FilmPeopleComponent,
     LeakyComponent,
+    MovieComponent,
+    MultiStreamComponent,
     RawComponent,
     RxOperatorComponent,
-    TakeUntilComponent,
-    TakeWhileComponent,
-    WhipwheehwComponent,
-    MovieComponent,
     SamplesComponent,
-    MultiStreamComponent,
-    SwPeopleComponent,
-    SwPeopleFindComponent,
-    WikipediaComponent,
-    ArtistsComponent,
-    ArtDetailComponent,
-    SimplefilmsComponent,
     Simplefilms2Component,
     Simplefilms3Component,
     Simplefilms4Component,
-    ErrorIsolationComponent,
+    SimplefilmsComponent,
+    SwPeopleComponent,
+    SwPeopleFindComponent,
+    TakeUntilComponent,
+    TakeWhileComponent,
+    WhipwheehwComponent,
+    WikipediaComponent,
   ],
   imports: [
     BrowserModule,
