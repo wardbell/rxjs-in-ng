@@ -37,13 +37,11 @@ export class WikipediaComponent {
   searchTerm = new FormControl();
   errorMsg = '';
 
-  constructor(private wikiService: WikipediaService) {}
-
   // Listen for search box value changes
-  searchValues$: Observable<string> = this.searchTerm.valueChanges;
+  searchTerms$: Observable<string> = this.searchTerm.valueChanges;
 
   // Turn Observable of search values into Observable of Wikipedia results
-  articles$ = this.searchValues$.pipe(
+  articles$ = this.searchTerms$.pipe(
 
     tap(() => this.errorMsg = ''), // clear previous error (if any)
     debounceTime(1000),            // wait for typing to stop
@@ -67,4 +65,6 @@ export class WikipediaComponent {
   makeResultsPretty(list: WikiResult[]): WikiResult[] {
     return list.length === 0 ? [{ title: 'No results' }] : list;
   }
+
+  constructor(private wikiService: WikipediaService) {}
 }
