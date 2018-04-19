@@ -7,7 +7,7 @@ import {
   distinctUntilChanged,
   map,
   concat,
-  concatMap,
+  switchMap,
   tap,
   catchError,
   filter
@@ -42,18 +42,20 @@ export class ErrorIsolationComponent {
 
   getMovie$ = id => this.http.get<RootObject<Movie>>(`http://swapi.co/api/swFilms/${id}`);
 
+  // The wrong way
   filmsNoErrorIsolation$ = this.filmIds$.pipe(
     // pipe user's film ids to get movies
-    concatMap(this.getMovie$),
+    switchMap(this.getMovie$),
     map(result => result.results.title),   // extract title
     catchError(e => of(`Movie not found`)) // show error
   );
 
 
 
+  // The right way
   filmsWithErrorIsolation$ = this.filmIds$.pipe(
     // pipe user's film ids to get movies
-    concatMap(id => this.getMovie$(id)
+    switchMap(id => this.getMovie$(id)
         // PIPE AGAIN off of get getMovie$
         .pipe(
             map(result => result.results.title),   // extract title
