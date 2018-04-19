@@ -20,15 +20,16 @@ export class SimpleFilmsService3 {
       .pipe(
 
         // RxJS operators
-        map((data: RootMovies) => data.results),
-
         catchError(err => {
           // log HTTP error and ...
           console.error('GET failed', err);
           // rethrow as a user-friendly message
           const message = 'Sorry but can\'t get movies right now; please try again later'
           return throwError(message);
-        })
+        }),
+
+        // return better results
+        map((data: RootMovies) => data.results),
     );
   }
 
