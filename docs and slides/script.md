@@ -92,6 +92,16 @@
   - local server
   - current session
 
+## sw-people
+- use a paged API with extend operator
+- start on people. point out counter and spinner
+- show sw-people-service
+- point out the $people obs is using extend.
+- combine multiple observables working in team for better ui (loading$ and count$)
+- explain that shareReplay makes sure that not all work is redone for loading$ and count$
+- show sw-people component and template.
+- then show sw-people-find component/template
+
 
 ## Raw Observables
 

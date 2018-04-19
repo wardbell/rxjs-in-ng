@@ -20,7 +20,7 @@ export class SwPeopleService {
 
   // load all people form the paged API
   // start off with loading the first page.
-  private people$ = this.load(`https://swapi.co/api/people/`).pipe(
+  people$ = this.load(`https://swapi.co/api/people/`).pipe(
     // then use expand to insert the rest of the pages.
     expand(r => (r.next ? this.load(r.next) : empty())),
     map(r => r.results),  // We only need the results
