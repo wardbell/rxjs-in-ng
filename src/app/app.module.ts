@@ -7,31 +7,31 @@ import { RouterModule, Routes, Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { TimeService } from './time.service';
+import { ArtistsComponent } from './rijks/artists/artists.component';
+import { AsyncPipeComponent } from './samples/async-pipe/async-pipe.component';
 import { ButtonBar } from './ui/button-bar/button-bar.component';
+  import {
+    ButtonBarItemComponent,
+    ButtonBarItemDirective
+  } from './ui/button-bar-item/button-bar-item.component';
 import { ButtonbarService } from './ui/button-bar/buttonbar.service';
-import { TakeWhileComponent } from './samples/take-while/take-while.component';
 import { CompAliveComponent } from './samples/comp-alive/comp-alive.component';
 import { CompIsThereComponent } from './samples/comp-is-there/comp-is-there.component';
 import { CompAliveObsComponent } from './samples/comp-alive-obs/comp-alive-obs.component';
-import { RxOperatorComponent } from './samples/rx-operator/rx-operator.component';
-import { RawComponent } from './samples/raw/raw.component';
 import { TakeUntilComponent } from './samples/take-until/take-until.component';
-import { WhipwheehwComponent } from './samples/whipWheehw/whipwheehw.component';
-import { AsyncPipeComponent } from './samples/async/async.component';
-import {
-  ButtonBarItemComponent,
-  ButtonBarItemDirective
-} from './ui/button-bar-item/button-bar-item.component';
+import { TakeWhileComponent } from './samples/take-while/take-while.component';
+import { TimeService } from './time.service';
 import { LeakyComponent } from './samples/leaky-component/leaky.component';
 import { MultiStreamComponent } from './samples/multi-stream/multi-stream.component';
+import { RawComponent } from './samples/raw/raw.component';
+import { RxOperatorComponent } from './samples/rx-operator/rx-operator.component';
 import { SwPeopleComponent } from './samples/sw-people/sw-people.component';
 import { SwPeopleService } from './samples/sw-people.service-expand';
 import { SwPeopleFindComponent } from './samples/sw-people-find/sw-people-find.component';
 import { GiphyService } from './samples/giphy.service';
+import { WhipwheehwComponent } from './samples/whipWheehw/whipwheehw.component';
 import { WikipediaService } from './samples/wikipedia.service';
 import { WikipediaComponent } from './samples/wikipedia/wikipedia.component';
-import { ArtistsComponent } from './rijks/artists/artists.component';
 import { RakiService } from './rijks/raki.service';
 import { ArtDetailComponent } from './rijks/art-detail/art-detail.component';
 import { SimplefilmsComponent } from './samples/simplefilms/simplefilms.component';
