@@ -10,6 +10,18 @@ button.home {
     background-color: green;
 }
 
+.title {
+  display: inline-block;
+  width: 300px;
+}
+
+.missing {
+  color: red;
+  display: inline-block;
+  font-style: italic;
+  width: 300px;
+}
+
 :host {
     display:grid;
     min-height:50vh;
