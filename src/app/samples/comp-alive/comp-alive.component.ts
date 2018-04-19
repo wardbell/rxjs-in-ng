@@ -16,7 +16,7 @@ export class CompAliveComponent implements OnInit, OnDestroy {
   time: string;
 
   constructor(private t: TimeService) {}  ngOnInit() {
-      this.t.time('CompAlive')
+      this.t.time$('CompAlive')
         .pipe(
           takeWhile(CompStillAlive(this))
         )

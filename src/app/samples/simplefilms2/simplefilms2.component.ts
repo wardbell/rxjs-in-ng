@@ -33,9 +33,7 @@ export class Simplefilms2Component implements OnInit {
       data => (this.films = data.results),
 
       // Report errors in this 2nd subscribe parameter
-      // err => {
-      //   this.errorMsg = err.message;
-      // }
+      // err => this.errorMsg = err.message
     );
   }
 

@@ -18,7 +18,7 @@ import { RxOperatorComponent } from './samples/rx-operator/rx-operator.component
 import { RawComponent } from './samples/raw/raw.component';
 import { TakeUntilComponent } from './samples/take-until/take-until.component';
 import { WhipwheehwComponent } from './samples/whipWheehw/whipwheehw.component';
-import { AsyncComponent } from './samples/async/async.component';
+import { AsyncPipeComponent } from './samples/async/async.component';
 import {
   ButtonBarItemComponent,
   ButtonBarItemDirective
@@ -58,7 +58,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AsyncComponent,
+    AsyncPipeComponent,
     ButtonBar,
     ButtonBarItemComponent,
     ButtonBarItemDirective,

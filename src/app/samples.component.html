@@ -35,16 +35,16 @@
     <app-leaky-component></app-leaky-component>
   </button-bar-item>
 
-  <button-bar-item *menuText="'AsyncPipe'">
-    <p>AsyncPipe automatically unsubscribes</p>
-    <p>Open console and click sample's button to close component and see it stop.</p>
-    <app-async></app-async>
-  </button-bar-item>
-
   <button-bar-item *menuText="'TakeUntil'">
     <p>Use takeUntil to unsubscribe</p>
     <p>Open console and click sample's button to close component and see it stop.</p>
     <app-take-until></app-take-until>
+  </button-bar-item>
+
+  <button-bar-item *menuText="'AsyncPipe'">
+    <p>AsyncPipe automatically unsubscribes</p>
+    <p>Open console and click sample's button to close component and see it stop.</p>
+    <app-async></app-async>
   </button-bar-item>
 
   <button-bar-item *menuText="'Multi-stream'">

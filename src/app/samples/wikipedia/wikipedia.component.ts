@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { WikipediaService, WikiResult } from '../../samples/wikipedia.service';
 import { FormControl } from '@angular/forms';
 
-import { of } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import {
   catchError,
   debounceTime,
@@ -20,7 +20,7 @@ import {
       <div *ngIf="errorMsg" class="error">{{errorMsg}}</div>
 
       <!-- Bind input box to the component class's searchTerm FormControl -->
-      <input type="text" [formControl]="searchTerm" />
+      <input type="text" [formControl]="searchTerm" placeholder="Search"/>
 
       <ul>
           <li *ngFor="let article of articles$ | async" [title]='article.desc'>
@@ -40,7 +40,10 @@ export class WikipediaComponent {
   constructor(private wikiService: WikipediaService) {}
 
   // Listen for search box value changes
-  articles$ = this.searchTerm.valueChanges.pipe(
+  searchValues$: Observable<string> = this.searchTerm.valueChanges;
+
+  // Turn Observable of search values into Observable of Wikipedia results
+  articles$ = this.searchValues$.pipe(
 
     tap(() => this.errorMsg = ''), // clear previous error (if any)
     debounceTime(1000),            // wait for typing to stop
@@ -53,26 +56,15 @@ export class WikipediaComponent {
         // If try to recover later, `searchTerm` observable completes
         catchError(err => {
           this.errorMsg = err.message;
-          return of([]); // return to happy path with empty list
+          return EMPTY; // return to happy path with empty list
         })
       )
     ),
 
-    map(this.makeResultsPretty),
-
-    tap(diagnostic)
+    map(this.makeResultsPretty)
   );
 
   makeResultsPretty(list: WikiResult[]): WikiResult[] {
     return list.length === 0 ? [{ title: 'No results' }] : list;
   }
-}
-
-
-
-/** State of the observable after each search */
-const diagnostic = {
-  next: () => console.log('** wikisearch alive'),
-  error: () => console.error('** wikisearch dead by error'),
-  completed: () => console.log('** wikisearch completed')
 }

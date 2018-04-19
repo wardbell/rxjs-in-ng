@@ -24,10 +24,10 @@ import { of } from 'rxjs';
     <input [formControl]="input" placeholder="Enter film id">
 
     <p>Without error isolation:</p>
-        {{filmsNoErrorIsolation$|async}}
+        {{filmsNoErrorIsolation$ | async}}
 
     <p>With error isolation:</p>
-       {{filmsWithErrorIsolation$|async}}
+       {{filmsWithErrorIsolation$ | async}}
   `,
   styles: [ 'p {font-weight: bold}']
 })

@@ -1,21 +1,26 @@
-import { TimeService } from '../../time.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { TimeService } from '../../time.service';
+import { Observable } from 'rxjs';
+
+let counter = 0;
 
 @Component({
   selector: 'app-async',
-  template: `
-
-    <p>async time: {{ time$ | async }}</p>
-
-  `
+  template: `<p>async time: {{ time$ | async }}</p>`
 })
-export class AsyncComponent implements OnDestroy {
+export class AsyncPipeComponent implements OnInit, OnDestroy {
 
-    time$ = this.timeService.time('AsyncPipe');
+  time$: Observable<string>
 
-    constructor(public timeService: TimeService) {}
+  ngOnInit() {
+    counter += 1;
+    this.time$ = this.timeService.time$(`AsyncPipeComponent #${counter}`);
 
-    ngOnDestroy() {
-      console.log('AsyncComponent destroyed');
-    }
+  }
+
+  ngOnDestroy() {
+    console.log(`AsyncPipeComponent #${counter} destroyed`);
+  }
+
+  constructor(public timeService: TimeService) {}
 }

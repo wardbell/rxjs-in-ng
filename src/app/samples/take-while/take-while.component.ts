@@ -13,7 +13,7 @@ export class TakeWhileComponent implements OnInit, OnDestroy {
   constructor(private t: TimeService) {}
 
   ngOnInit() {
-    this.t.time('TakeWhile').pipe(
+    this.t.time$('TakeWhile').pipe(
       takeWhile(() => this.active)
     )
     .subscribe(
