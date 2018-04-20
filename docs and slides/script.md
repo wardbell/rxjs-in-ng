@@ -1,5 +1,7 @@
 # Steps through the Samples
 
+>Slide deck at https://tinyurl.com/y99dxka6
+
 ## Simple Films 1
 - Component
   - injected service
