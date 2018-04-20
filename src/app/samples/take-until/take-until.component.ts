@@ -16,11 +16,11 @@ export class TakeUntilComponent implements OnInit, OnDestroy {
   time$: Observable<string>
 
   // #1 - create a Notifier subject
-  private onDestroy = new Subject<void>();
+  private onDestroy$ = new Subject<void>();
 
   // #2 Call next() on the notifier when component dies
   ngOnDestroy() {
-    this.onDestroy.next();
+    this.onDestroy$.next();
     console.log(`TakeUntilComponent #${counter} destroyed`);
   }
 
@@ -29,7 +29,7 @@ export class TakeUntilComponent implements OnInit, OnDestroy {
     this.time$ = this.timeService.time$(`TakeUntilComponent #${counter}`);
     this.time$.pipe(
       // #3 Pipe notifier into `takeUntil()`
-      takeUntil(this.onDestroy)
+      takeUntil(this.onDestroy$)
     )
     .subscribe(
         time => (this.time = time),
