@@ -1,21 +1,13 @@
 // tslint:disable:member-ordering
 import { Component } from '@angular/core';
-import { Movie, RootMovies, RootObject } from '../sw-interfaces';
 import { FormControl } from '@angular/forms';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  map,
-  concat,
-  switchMap,
-  tap,
-  catchError,
-  filter
-} from 'rxjs/operators';
-import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-import { SwUrlService } from '../sw-url.service';
+
+import { catchError, debounceTime, map, switchMap} from 'rxjs/operators';
 import { of } from 'rxjs';
+
+import { Movie, RootObject } from '../sw-interfaces';
+import { SwUrlService } from '../sw-url.service';
 
 @Component({
   selector: 'app-error-isolation',
@@ -23,17 +15,13 @@ import { of } from 'rxjs';
     <h3>Error Isolation</h3>
     <input [formControl]="input" placeholder="Enter film id">
 
-    <p>Without error isolation:</p>
+    <h4>Without error isolation:</h4>
         {{filmsNoErrorIsolation$ | async}}
 
-    <p>With error isolation:</p>
-       {{filmsWithErrorIsolation$ | async}}
-  `,
-  styles: [ 'p {font-weight: bold}']
+    <h4>With error isolation:</h4>
+       {{filmsWithErrorIsolation$ | async}}`
 })
 export class ErrorIsolationComponent {
-  films: Movie[];
-
   input = new FormControl('');
 
   filmIds$ = this.input.valueChanges.pipe(
@@ -50,13 +38,11 @@ export class ErrorIsolationComponent {
     catchError(e => of(`Movie not found`)) // show error
   );
 
-
-
   // The right way
   filmsWithErrorIsolation$ = this.filmIds$.pipe(
     // pipe user's film ids to get movies
     switchMap(id => this.getMovie$(id)
-        // PIPE AGAIN off of get getMovie$
+        // PIPE AGAIN off of getMovie$
         .pipe(
             map(result => result.results.title),   // extract title
             catchError(e => of(`Movie not found`)) // show error
@@ -65,5 +51,4 @@ export class ErrorIsolationComponent {
   );
 
   constructor(private http: HttpClient, private swUrlService: SwUrlService) {}
-
 }
