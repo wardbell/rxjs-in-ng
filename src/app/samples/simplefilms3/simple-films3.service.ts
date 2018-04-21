@@ -15,7 +15,7 @@ export class SimpleFilmsService3 {
 
   constructor(private http: HttpClient, private swUrlService: SwUrlService) {}
 
-  getFilms() {
+  getFilms(): Observable<Movie[]> {
     return this.http.get<RootMovies>(this.url)
       .pipe(
 
@@ -24,22 +24,22 @@ export class SimpleFilmsService3 {
           // log HTTP error and ...
           console.error('GET failed', err);
           // rethrow as a user-friendly message
-          const message = 'Sorry but can\'t get movies right now; please try again later'
+          const message = 'Sorry, we can\'t get movies right now; please try again later'
           return throwError(message);
         }),
 
-        // return better results
+        // extract the Movies from the API's data object
         map((data: RootMovies) => data.results),
     );
   }
 
-  add(movie: Movie) {
-    return this.http.post(this.url, movie).pipe(
+  add(movie: Movie): Observable<Movie> {
+    return this.http.post<Movie>(this.url, movie).pipe(
       catchError(err => {
         // log HTTP error and ...
         console.error('GET failed', err);
         // rethrow as a user-friendly message
-        const message = 'Sorry but can\'t add movies right now; please try again later';
+        const message = 'Sorry, we can\'t add movies right now; please try again later';
         return throwError(message);
       })
     );

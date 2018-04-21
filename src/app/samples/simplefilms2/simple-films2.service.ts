@@ -16,8 +16,8 @@ export class SimpleFilmsService2 {
   }
 
 
-  add(movie: Movie): Observable<{}> {
-    return this.http.post(this.url, movie);
+  add(movie: Movie): Observable<Movie> {
+    return this.http.post<Movie>(this.url, movie);
   }
 
 
