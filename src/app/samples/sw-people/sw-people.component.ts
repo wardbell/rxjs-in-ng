@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { SwPeopleService } from '../../samples/sw-people.service-expand';
+import { SwPeopleExpandService } from './sw-people-expand.service';
 
 @Component({
-    selector: 'app-sw-people',
-    templateUrl: './sw-people.component.html',
-    styles: []
+  selector: 'app-sw-people',
+  templateUrl: './sw-people.component.html',
+  providers: [ SwPeopleExpandService ]
 })
 export class SwPeopleComponent {
-    constructor(public sw: SwPeopleService) {}
+  constructor(public sw: SwPeopleExpandService) {}
 }

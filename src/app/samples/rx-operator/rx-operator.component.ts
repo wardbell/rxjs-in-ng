@@ -15,7 +15,7 @@ export class RxOperatorComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // debugger;
     // use this form to allow my monkey-patched rx-operator.
-    (<any>this.t.time)
+    (<any>this.t.time$)
       .takeWhileAlive(this)
       .subscribe(time => (this.time = time), err => console.error(err), () => console.log('completed'));
   }

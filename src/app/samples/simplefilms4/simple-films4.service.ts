@@ -11,7 +11,7 @@ import { Observable, throwError } from 'rxjs';
 
 
 @Injectable()
-export class SimpleFilmsService3 {
+export class SimpleFilmsService4 {
 
   constructor(private http: HttpClient, private swUrlService: SwUrlService) {}
 

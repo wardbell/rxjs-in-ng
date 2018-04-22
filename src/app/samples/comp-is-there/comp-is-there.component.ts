@@ -17,7 +17,7 @@ export class CompIsThereComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.t
-      .time('CompIsThere')
+      .time$('CompIsThere')
       .pipe(takeUntil(this.componentDone))
       .subscribe(time => (this.time = time), err => console.error(err), () => console.log('completed'));
   }

@@ -25,6 +25,10 @@ export interface Movie {
     id: number;
 }
 
+export interface NewMovieData extends Movie {
+  year?: string;
+}
+
 export interface People {
     name: string;
     height?: string;
@@ -34,7 +38,7 @@ export interface People {
     eye_color?: string;
     birth_year?: string;
     gender?: string;
-    homeworld?: string;
+    homeworld?: string; // url of the homeworld
     films?: string[];
     species?: string[];
     vehicles?: string[];
@@ -46,3 +50,20 @@ export interface People {
 }
 
 export type RootPeople = RootObject<People[]>;
+
+export interface Planet {
+    climate: string; // 'Arid',
+    created: string; // 2014-12-09T13:50:49.641000Z,
+    diameter: number; // 10465,
+    edited: string; // 2014-12-15T13:48:16.167217Z,
+    films: string[] //  ['https://swapi.co/api/films/1/'],
+    gravity: number; // 1,
+    name: string; // 'Tatooine',
+    orbital_period: number; // 304,
+    population: number; // 120000,
+    residents: string[]; // ['https://swapi.co/api/people/1/'],
+    rotation_period: number; // 23,
+    surface_water: number; // 1,
+    terrain: string; // 'Dessert',
+    url: string; // 'https://swapi.co/api/planets/1/'
+}

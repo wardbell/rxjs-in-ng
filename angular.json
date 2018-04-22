@@ -34,14 +34,6 @@
             "scripts": []
           },
           "configurations": {
-            "dev": {
-              "fileReplacements": [
-                {
-                  "with": "src/environments/environment.ts",
-                  "replace": "dist/environments/environment.ts"
-                }
-              ]
-            },
             "production": {
               "optimization": true,
               "outputHashing": "all",
@@ -55,7 +47,7 @@
               "fileReplacements": [
                 {
                   "with": "src/environments/environment.ts",
-                  "replace": "dist/demo/environment.ts"
+                  "replace": "src/environments/environment.prod.ts"
                 }
               ]
             }

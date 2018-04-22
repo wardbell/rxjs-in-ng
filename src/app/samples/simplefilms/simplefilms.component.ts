@@ -6,22 +6,27 @@ import { SimpleFilmsService } from './simple-films.service';
   selector: 'app-simplefilms',
   template: `
 
-  <h3>Simple Films 1: get and subscribe</h3>
+  <h3>Simple Films 1: get and subscribe and errorhandling</h3>
 
-  <div *ngFor="let film of films">{{film.title}}<div>
+  <div *ngFor="let film of films">{{film.title}}</div>
   `,
-  providers: [ SimpleFilmsService ]
+  providers: [SimpleFilmsService]
 })
 export class SimplefilmsComponent implements OnInit {
+  errorMsg: string;
   films: Movie[];
 
   constructor(private filmsService: SimpleFilmsService) {}
 
   ngOnInit() {
-    const films$ = this.filmsService.getFilms();
+    this.getData()
+  }
 
-    films$.subscribe(
-      data => (this.films = data.results)
+  getData() {
+    this.filmsService.getFilms().subscribe(
+
+      data => (this.films = data.results),
+
     );
   }
 }

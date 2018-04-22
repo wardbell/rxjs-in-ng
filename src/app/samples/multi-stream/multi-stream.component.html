@@ -10,21 +10,21 @@
     <tbody>
       <tr *ngFor="let film of films">
         <td>{{film.title}}</td>
-        <td>{{film.release_date|date:"y"}}</td>
+        <td>{{film.release_date | date:"y"}}</td>
       </tr>
     </tbody>
   </table>
-  <div>
+  <form [formGroup]="form" (ngSubmit)="add()">
     <p><i><b>Add Movie</b></i></p>
     <div>
       <label>Name
-          <input type="text" #name>
+          <input type="text" formControlName="title">
       </label>
       <label>Year
-          <input type="number" #year min=1970 max=2020>
+          <input type="number" min=1970 max=2020 formControlName="year">
       </label>
     </div>
-    <button (click)="add({title:name.value,release_date:year.value})">Add</button>
-    <button (click)="clear()">Clear local storage</button>
-  </div>
+    <button type="submit">Add</button>
+    <button type="button" (click)="clear()">Clear local storage</button>
+  </form>
 </div>

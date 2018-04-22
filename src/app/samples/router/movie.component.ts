@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable, Subscription } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 
 import { Movie } from '../../samples/sw-interfaces';
 import { FilmService } from './film.service';
@@ -15,12 +15,12 @@ import { FilmService } from './film.service';
       <div>
         <button (click)="previousMovie()">Previous</button>
 
-        <span *ngIf="currentMovie | async as movie; else noMovie" >
-            ({{movie.id}}) {{movie.title }}
-        </span>
+        <div *ngIf="currentMovie$ | async as movie; else noMovie"  class="title">
+            ({{movie.id}}) {{ movie.title }}
+        </div>
 
         <ng-template #noMovie>
-            <span><i>No Movie</i></span>
+            <div class="missing">No Movie</div>
         </ng-template>
 
         <button (click)="nextMovie()">Next</button>
@@ -30,32 +30,64 @@ import { FilmService } from './film.service';
   styleUrls: ['./movie.component.css']
 })
 export class MovieComponent implements OnInit, OnDestroy {
-  private currentId: number;
-  public currentMovie: Observable<Movie>;
-  private routerEventsSubscription: Subscription;
+  currentMovie$: Observable<Movie>;
 
-  constructor(private filmService: FilmService, private route: ActivatedRoute, private router: Router) {
-    // Listen to the router do its thing
-    // What is `routerEventsSubscription`?
-    this.routerEventsSubscription = router.events.subscribe(event => {
-      console.log('Router event: ', event);
-    });
-  }
+  currentId: number;
+  nextId: number;
+  previousId: number;
+
+  routerEventsSubscription: Subscription;
+
+  constructor(
+    private filmService: FilmService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
-    console.log('MovieComponent initialized');
+    this.listenToRouteParams();
+    this.listenToRouterEvents();
+  }
 
-    // Get new movie whenever the URL's id changes
-    // Question: How can the id change?
-    this.currentMovie = this.route.paramMap.pipe(
-      switchMap(params => {
-        const id = +params.get('id');
+  private listenToRouteParams() {
+    // ActivatedRoute.paramMap observable changes whenever the URL's id changes
+    this.currentMovie$ = this.route.paramMap.pipe(
+
+      // extract film id parameter
+      map(params => params.get('id')),
+
+      // switchMap because can discard in-flight request for a new id
+      switchMap(id => {
         return this.filmService.getFilm(id).pipe(
-          // Question: how could movie be undefined?
-          tap(movie => (this.currentId = movie && movie.id))
+          tap(movie => this.currentId = movie ? movie.id : 0)
         );
       })
     );
+  }
+
+  nextMovie() {
+    this.navigate(this.currentId + 1);
+  }
+
+  previousMovie() {
+    this.navigate(this.currentId - 1);
+  }
+
+  navigate(id: number) {
+    id = id || 1;
+    this.router.navigate([`/movie/${id}`]);
+  }
+
+
+
+
+  /// ROUTER EVENTS ////
+  private listenToRouterEvents() {
+    // Listen to the router do its thing
+    // What is `routerEventsSubscription`?
+    this.routerEventsSubscription = this.router.events.subscribe(event => {
+      console.log('Router event: ', event);
+    });
+    console.log('MovieComponent initialized');
   }
 
   ngOnDestroy(): void {
@@ -66,13 +98,4 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.routerEventsSubscription.unsubscribe();
   }
 
-  nextMovie() {
-    this.currentId = this.currentId ? this.currentId + 1 : 1;
-    this.router.navigate([`/movie/${this.currentId}`]);
-  }
-
-  previousMovie() {
-    this.currentId = this.currentId ? this.currentId - 1 : 1;
-    this.router.navigate([`/movie/${this.currentId}`]);
-  }
 }

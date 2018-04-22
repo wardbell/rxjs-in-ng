@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
       )
       // I use a subscribe here, Because I don't have access to the bodly element from my template.
       // so there is no way to do <body [style.backgroundImage]="backgroundArr[next]|async"
-      .subscribe();
+      // .subscribe();
   }
 
   toggleSwUrl() {

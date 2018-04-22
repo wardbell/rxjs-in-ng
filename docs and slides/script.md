@@ -1,5 +1,7 @@
 # Steps through the Samples
 
+>Slide deck at https://tinyurl.com/y99dxka6
+
 ## Simple Films 1
 - Component
   - injected service
@@ -11,7 +13,7 @@
   - `HttpClient` & subscribe
 - No feedback on error
 
-## Simple Films 2
+## Simple Films 2 (add and subscribe)
 - Component
   - Handle error in subscribe
   - Adds movie (no subscribe at first)
@@ -21,7 +23,7 @@
   - Show what happens when don’t subscribe to the `addHero` observable
   - Must subscribe to execute. It’s like LINQ `toList()`.
 
-## Simple Films 3
+## Simple Films 3 (mapping of data and error)
 - Component (AsyncPipe)
   - `film$` is `Observable<Movie[]>` instead of `Movie[]`
   - `AsyncPipe` (another Angular observable API) in the template
@@ -39,24 +41,26 @@
   - Re-throw user-friendly error message
   - Must handle with `catchError` in the component or else...
   - using `map` to reshape data for component
-  
 
-- `Old (<5.5) vs New (v5.5) RxJS syntax [in `old-chain-syntax` folder]
+ ## Simple Films 4 (AsyncPipe)
+- Component (AsyncPipe)
+  - `film$` is `Observable<Movie[]>` instead of `Movie[]`
+  - `AsyncPipe` (another Angular observable API) in the template
+  -  getting
 
-## Raw Observables
+- Component (`catchError` instead of `subscribe`)
+  - Critical to present a user-friendly error even as you capture full error info for developers.
+  - `pipe()`
+  - `catchError()`
+  - import operators
+  - Catching errors and returning on the next channel this time
 
-_Observables are just functions_.
-
-- Create observable 
-- The 3 channels: next, error, complete
-- Versions:
-  - v1: simple observable functions
-  - v2: sync and async; errors
-  - binding: how Angular binds to input box and keystrokes
-  - v3: custom event observable (how `HttpClient` works)
-  - v4: Observable creation functions (`fromEvent`, `of`, ...)
-  - binding (again): from `keyup` to `keyup.enter`
-  - v4 (again): `filter()` for _enter_ key
+- Service
+  - Operators: `map` and `catchError` in the service
+  - Re-throw user-friendly error message
+  - Must handle with `catchError` in the component or else...
+  - using `map` to reshape data for component
+   
 
 ## Wikipedia
 - Operators make chaining (piping) easy
@@ -65,6 +69,8 @@ _Observables are just functions_.
 - `FormControl` to get changes for validation
 - _Reactive Forms_: another Angular observable API
 - `retryWhen` (go offline in the network tab)
+
+## Error Isolation
 
 ## Router
 - Another major Angular observable API
@@ -87,4 +93,30 @@ _Observables are just functions_.
   - server
   - local server
   - current session
+
+## sw-people
+- use a paged API with extend operator
+- start on people. point out counter and spinner
+- show sw-people-service
+- point out the $people obs is using extend.
+- combine multiple observables working in team for better ui (loading$ and count$)
+- explain that shareReplay makes sure that not all work is redone for loading$ and count$
+- show sw-people component and template.
+- then show sw-people-find component/template
+
+
+## Raw Observables
+
+_Observables are just functions_.
+
+- Create observable 
+- The 3 channels: next, error, complete
+- Versions:
+  - v1: simple observable functions
+  - v2: sync and async; errors
+  - binding: how Angular binds to input box and keystrokes
+  - v3: custom event observable (how `HttpClient` works)
+  - v4: Observable creation functions (`fromEvent`, `of`, ...)
+  - binding (again): from `keyup` to `keyup.enter`
+  - v4 (again): `filter()` for _enter_ key
 

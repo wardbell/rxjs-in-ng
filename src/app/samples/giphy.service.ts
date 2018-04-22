@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { of } from 'rxjs';
-import { catchError, map, merge, tap } from 'rxjs/operators';
+import { catchError, map, merge, tap, delay } from 'rxjs/operators';
 
 import { RootObject } from './giphy';
 
@@ -26,9 +26,10 @@ export class GiphyService {
         this.http
           .get<RootObject>(
             // tslint:disable-next-line:max-line-length
-            `https://api.giphy.com/v1/gifs/searchapi_key=sEl7UmhvaI69Mrw9h8Ug0xNTnuhCk  pT&q={key}limit=1&offset=0rating=G&lang=en`
+            `https://api.giphy.com/v1/gifs/search?api_key=sEl7UmhvaI69Mrw9h8Ug0xNTnuhCkJpT&q=${key}&limit=1&offset=0&rating=G&lang=en`
           )
           .pipe(
+            delay(500),
             map(r => r.data[0].images.fixed_height_small.url),
             catchError(e => {
               console.log(key);

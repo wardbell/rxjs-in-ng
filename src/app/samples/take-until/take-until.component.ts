@@ -1,36 +1,43 @@
+// tslint:disable:member-ordering
+import { TimeService } from '../../time.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Subject  } from 'rxjs';
+import { Subject, Observable  } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { TimeService } from '../../time.service';
+let counter = 0;
 
 @Component({
     selector: 'app-take-until',
-    template: `
-
-      <p>observable operator: {{time }}</p>
-    `
+    template: ` <p>time: {{ time }}</p>`
 })
 export class TakeUntilComponent implements OnInit, OnDestroy {
   time: string;
-  private onDestroy = new Subject<void>();
+  time$: Observable<string>
 
-  constructor(private t: TimeService) {}
+  // #1 - create a Notifier subject
+  private onDestroy$ = new Subject<void>();
+
+  // #2 Call next() on the notifier when component dies
+  ngOnDestroy() {
+    this.onDestroy$.next();
+    console.log(`TakeUntilComponent #${counter} destroyed`);
+  }
 
   ngOnInit() {
-    this.t.time('TakeUntil')
-      .pipe(
-        takeUntil(this.onDestroy)
-      )
-      .subscribe(
-          time => (this.time = time),
-          err => console.error(err),
-          () => console.log('TakeUntil completed')
-      );
+    counter += 1;
+    this.time$ = this.timeService.time$(`TakeUntilComponent #${counter}`);
+    this.time$.pipe(
+      // #3 Pipe notifier into `takeUntil()`
+      takeUntil(this.onDestroy$)
+    )
+    .subscribe(
+        time => (this.time = time),
+        err => console.error(err),
+        () => console.log('TakeUntil completed')
+    );
   }
 
-  ngOnDestroy() {
-    this.onDestroy.next();
-  }
+  constructor(private timeService: TimeService) {}
+
 }

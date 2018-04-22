@@ -9,13 +9,7 @@
     <button routerLink="/movie/1" class="router">Router</button>
     <button class="toggleSwUrl" (click)="toggleSwUrl()">Toggle SwUrl</button>
   </button-bar>
-  <!-- <div class="MainHolder" [style.backgroundImage]="raki.randomImage$ | async"> -->
   <div class="MainHolder" #main>
     <router-outlet></router-outlet>
   </div>
-  <footer>
-    <!--
-        Samples marked with * are experiments, and should not be used in production!
-        -->
-  </footer>
 </div>
