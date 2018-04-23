@@ -24,6 +24,7 @@ import { GiphyService } from './samples/giphy.service';
 import { InMemoryDataService } from './samples/in-memory-data.service';
 import { LeakyComponent } from './samples/leaky-component/leaky.component';
 import { MultiStreamComponent } from './samples/multi-stream/multi-stream.component';
+import { PeopleWithHomePlanetComponent } from './samples/fork-join/people-with-home-planet.component';
 import { RawComponent } from './samples/raw/raw.component';
 import { MovieComponent } from './samples/router/movie.component';
 import { RxOperatorComponent } from './samples/rx-operator/rx-operator.component';
@@ -69,6 +70,7 @@ const routes: Routes = [
     LeakyComponent,
     MovieComponent,
     MultiStreamComponent,
+    PeopleWithHomePlanetComponent,
     RawComponent,
     RxOperatorComponent,
     SamplesComponent,

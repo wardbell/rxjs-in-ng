@@ -1,0 +1,29 @@
+<div class="card">
+
+    <!-- Toggle results count using AsyncPipe -->
+    <div>There are {{service.count$ | async}} results in the set
+
+        <!-- Toggle spinner using AsyncPipe -->
+        <span *ngIf="service.loading$ | async">
+            <img src="/assets/spinner.svg" alt="spinner" style="width:2em;height:1em;"> Loading..
+        </span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+              <th>planet</th>
+              <th>name</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- Show people using AsyncPipe -->
+            <tr *ngFor="let people of service.peopleWithHomePlanets$ | async">
+              <td>{{people?.homePlanet?.name}}</td>
+              <td>{{people.name}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

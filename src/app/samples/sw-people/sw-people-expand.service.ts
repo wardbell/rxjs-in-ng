@@ -2,7 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { concat, empty, of, Observable } from 'rxjs';
+import { concat, EMPTY, of, Observable } from 'rxjs';
 import {
   catchError,
   expand,
@@ -31,13 +31,13 @@ export class SwPeopleExpandService {
         tap(() => console.log('fetched from back-end: ' + url))
       );
 
-  // load all people form the paged API
+  // load all people from the paged API
   // start off with loading the first page.
   people$ = this.load(`https://swapi.co/api/people/`).pipe(
 
     // expand to get additional pages
     // hint: r.next means there's another page
-    expand(r => r.next ? this.load(r.next) : empty()),
+    expand(r => r.next ? this.load(r.next) : EMPTY),
 
     // for each page, extract the people (in results)
     map(r => r.results),
