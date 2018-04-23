@@ -7,28 +7,14 @@
 // forkJoin, like Promise.all(), waits for all of its observables to complete
 // before returning their results in an array
 // tslint:disable:member-ordering
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { concat, EMPTY, forkJoin, Observable, of, Subject } from 'rxjs';
-import {
-  catchError,
-  expand,
-  first,
-  groupBy,
-  ignoreElements,
-  map,
-  mergeMap,
-  reduce,
-  scan,
-  shareReplay,
-  startWith,
-  tap
-} from 'rxjs/operators';
-
-import { People, RootPeople, Planet } from '../sw-interfaces';
+import { Injectable } from '@angular/core';
+import { EMPTY, Observable, concat, forkJoin, of } from 'rxjs';
+import { catchError, expand, ignoreElements, map, mergeMap, scan, shareReplay, startWith, tap } from 'rxjs/operators';
+import { People, Planet, RootPeople } from '../sw-interfaces';
 import { SwUrlService } from '../sw-url.service';
-import { ErrorIsolationComponent } from '../error-isolation/error-isolation.component';
+
+
 
 interface PersonWithPlanet extends People {
   homePlanet?: Planet;
@@ -44,8 +30,7 @@ export class PeopleWithHomePlanetService {
   // load a page of people
   loadPeople = (url: string): Observable<RootPeople> =>
     this.http
-      .get<RootPeople>(url)
-      .pipe(
+      .get<RootPeople>(url).pipe(
         catchError(() => of(null))
       );
 
@@ -69,30 +54,25 @@ export class PeopleWithHomePlanetService {
   );
 
   /** Cache of planets */
-  planets: Planets = {};
+  planetsCache = new Map<string, Observable<Planet>>();
 
   // get a homeworld planet via the url
   // from the cache of planets or from the server
   loadHomePlanet = (homeworldUrl: string): Observable<Planet> => {
-    const planet = this.planets[homeworldUrl];
-    if (planet) {
-      return planet;
+    // use a cahce to prevent prevent double urls.
+    if (this.planetsCache.has(homeworldUrl)) {
+      return this.planetsCache.get(homeworldUrl);
     }
-    const request = this.http
+    return this.http
       .get<Planet>(homeworldUrl).pipe(
-        map(p => {
-          this.planets[homeworldUrl] = of(p);
-          return p;
-        }),
         catchError (error => {
           const missing: Observable<Planet> =
             of( <any> { name: 'Unknown', url: homeworldUrl });
-          return this.planets[homeworldUrl] = missing;
+          return  missing;
         }),
-        shareReplay(1)
+        // use a side-effect to fill the cache
+        tap(homeWorld => this.planetsCache.set(homeworldUrl, of(homeWorld)))
       );
-      this.planets[homeworldUrl] = request;
-      return request;
   }
 
   // SW people with their homeworld planets
@@ -115,11 +95,7 @@ export class PeopleWithHomePlanetService {
             // clone people with its homeworld
             return { ...person, homePlanet };
           }),
-
-          // assume that it 404'd because there was no planet
-          catchError((error: any) => {
-            return of(person);
-          })
+          // catchError is unneeded here, as the 404 is handled by loadHomePlanet?
         )
       );
 
@@ -145,6 +121,8 @@ export class PeopleWithHomePlanetService {
   constructor(private http: HttpClient, private swUrlService: SwUrlService) {}
 }
 
+
+// Internals
 function byPlanetAndName(x: PersonWithPlanet, y: PersonWithPlanet) {
   const planetCompare =
     (x.homePlanet ? x.homePlanet.name : '')  <
