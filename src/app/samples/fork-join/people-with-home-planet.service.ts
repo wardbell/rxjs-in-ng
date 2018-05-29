@@ -9,7 +9,7 @@
 // tslint:disable:member-ordering
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, concat, forkJoin, of } from 'rxjs';
+import { concat, EMPTY, forkJoin, Observable, of } from 'rxjs';
 import { catchError, expand, ignoreElements, map, mergeMap, scan, shareReplay, startWith, tap } from 'rxjs/operators';
 import { People, Planet, RootPeople } from '../sw-interfaces';
 import { SwUrlService } from '../sw-url.service';

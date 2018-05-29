@@ -4,9 +4,9 @@
   "scripts": {
     "demo": "npm-run-all -p demo:*",
     "demo:serve": "yarn start",
-    "demo:app": "yarn wait-on http-get://localhost:8806 && google-chrome --app=http://localhost:8806",
+    "demo:app": "yarn wait-on http-get://localhost:8806 && google-chrome --new-window --app=http://localhost:8806",
     "ng": "ng",
-    "start": "ng serve --port 8806 ",
+    "start": "ng serve --port 8806",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",

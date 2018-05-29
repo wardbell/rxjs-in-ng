@@ -12,7 +12,7 @@ import { SimpleFilmsService } from './simple-films.service';
   `,
   providers: [SimpleFilmsService]
 })
-export class SimplefilmsComponent implements OnInit {
+export class SimpleFilmsComponent implements OnInit {
   errorMsg: string;
   films: Movie[];
 

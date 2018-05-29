@@ -28,7 +28,7 @@ import { PeopleWithHomePlanetComponent } from './samples/fork-join/people-with-h
 import { RawComponent } from './samples/raw/raw.component';
 import { MovieComponent } from './samples/router/movie.component';
 import { RxOperatorComponent } from './samples/rx-operator/rx-operator.component';
-import { SimplefilmsComponent } from './samples/simplefilms/simplefilms.component';
+import { SimpleFilmsComponent } from './samples/simplefilms/simplefilms.component';
 import { Simplefilms2Component } from './samples/simplefilms2/simplefilms2.component';
 import { Simplefilms3Component } from './samples/simplefilms3/simplefilms3.component';
 import { Simplefilms4Component } from './samples/simplefilms4/simplefilms4.component';
@@ -77,7 +77,7 @@ const routes: Routes = [
     Simplefilms2Component,
     Simplefilms3Component,
     Simplefilms4Component,
-    SimplefilmsComponent,
+    SimpleFilmsComponent,
     SwPeopleComponent,
     SwPeopleFindComponent,
     TakeUntilComponent,
